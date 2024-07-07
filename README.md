@@ -1,6 +1,6 @@
 # minishell_42
 
-https://github.com/AllanRye9/minishell_42/blob/main/minishell.gif
+![](https://github.com/AllanRye9/minishell_42/blob/main/minishell.gif)
 
 # Recreation of bash in mini version with following builtins.
 - `echo` with option `-n`.
