@@ -1,82 +1,65 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/07/03 15:29:57 by sbartoul          #+#    #+#              #
-#    Updated: 2024/07/03 15:30:24 by sbartoul         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME		:= minishell
+LIBFT		:= libft.a
+CC			:= cc
+CFLAGS		:= -Wall -Wextra -Werror
+LIBFT_PATH	:= "libft"
 
-NAME = minishell
+BUILT-INS	:= 	built-ins/cd.c \
+				built-ins/echo.c \
+				built-ins/env_utils.c \
+				built-ins/env.c \
+				built-ins/exit.c \
+				built-ins/export.c \
+				built-ins/pwd.c \
+				built-ins/unset.c 
 
-AR = ar rcs
-CC = cc
-RM = rm -f
-CFLAGS = -Wall -Wextra -Werror
-SRCS = ft_bzero.c					\
-		ft_atoi.c					\
-		ft_calloc.c					\
-		ft_isalnum.c				\
-		ft_isalpha.c				\
-		ft_isascii.c				\
-		ft_isdigit.c				\
-		ft_isprint.c				\
-		ft_itoa.c					\
-		ft_memchr.c					\
-		ft_memcmp.c					\
-		ft_memcpy.c					\
-		ft_memmove.c				\
-		ft_memset.c					\
-		ft_putchar_fd.c				\
-		ft_putendl_fd.c				\
-		ft_putnbr_fd.c				\
-		ft_putstr_fd.c				\
-		ft_split.c					\
-		ft_strchr.c					\
-		ft_strdup.c					\
-		ft_striteri.c				\
-		ft_strjoin.c				\
-		ft_strlcat.c				\
-		ft_strlcpy.c				\
-		ft_strlen.c					\
-		ft_strmapi.c				\
-		ft_strncmp.c				\
-		ft_strnstr.c				\
-		ft_strrchr.c				\
-		ft_strtrim.c				\
-		ft_substr.c					\
-		ft_tolower.c				\
-		ft_toupper.c				\
+TOKENIZING	:= 	tokenizing/tokenizing.c
 
-SRCSBONUS = ft_lstnew.c					\
-			ft_lstadd_front.c			\
-			ft_lstsize.c				\
-			ft_lstlast.c				\
-			ft_lstadd_back.c			\
-			ft_lstdelone.c				\
-			ft_lstclear.c				\
-			ft_lstiter.c				\
-			ft_lstmap.c					\
+CLEAN		:=	clean/clean.c
 
+# EXECUTION	:= 	execution/execution.c \
+# 				execution/readline.c
+ 
+MAIN		:= 	main/main.c
 
-OBJECTS = ${SRCS:.c=.o}
-OBJECTSBONUS = ${SRCSBONUS:.c=.o}
+PARSING		:=	parsing/parsing.c
 
-.c.o:
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
-${NAME}: ${OBJECTS}
-				${AR} ${NAME} ${OBJECTS}
-bonus: ${NAME} ${OBJECTSBONUS}
-		${AR} ${NAME} ${OBJECTSBONUS}
+SIGNALS		:=	signals/signals.c
 
-all: ${NAME}
+UTILS		:=	utils/utils.c
+
+SRC			:= 	$(CLEAN) \
+				$(EXECUTION) \
+				$(BUILT-INS) \
+				$(PARSING) \
+				$(SIGNALS) \
+				$(UTILS) \
+				$(TOKENIZING) \
+				$(MAIN) \
+
+OBJS		:= $(SRC:.c=.o)
+
+READLINE_PATH:=	/goinfre/homebrew/opt/readline
+
+%.o: %.c
+	$(CC) $(FLAGS) -c $< -o $@ -Iinclude -I$(READLINE_PATH)/include
+
+all: $(NAME)
+
+$(LIBFT):
+		make -C $(LIBFT_PATH)
+
+$(NAME): $(OBJ) $(LIBFT)
+		$(CC) -o $(NAME) $(OBJ) -L$(LIBFT_PATH) -lft -L$(READLINE_PATH)/lib -lreadline
+
 clean:
-		${RM} ${OBJECTS} ${OBJECTSBONUS}
-fclean: clean
-		${RM} ${NAME}
-re : fclean all
+		$(MAKE) clean -C $(LIBFT_PATH)
+		rm -f $(OBJS)
 
-.PHONY: all clean fclean re
+fclean: clean
+		$(MAKE) fclean -C $(LIBFT_PATH)
+		rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: clean fclean all re
