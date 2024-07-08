@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 19:00:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/08 19:01:23 by sbartoul         ###   ########.fr       */
+/*   Created: 2024/07/08 18:54:49 by sbartoul          #+#    #+#             */
+/*   Updated: 2024/07/08 18:59:31 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef COLORS_H
+# define COLORS_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include <signal.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "colors.h"
-
-int	ft_atoi_base(char *s, int base);
+# define PROMPT_MSG "\033[1;36mminishell\033[34m$ \033[0m"
 
 #endif
