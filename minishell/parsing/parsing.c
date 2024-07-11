@@ -1,44 +1,64 @@
 #include "../include/minishell.h"
 
-static char to_lower(char c)
-{
-    if (c >= 'A' && c <= 'Z')
-            return (c + 32);
-    return c;
-}
+// function for parsing command words 
+void parseSpace(char* str, char** parsed) 
+{ 
+	int i;
 
-static int get_digit(char c, int base)
-{
-    int max;
-    if (base <= 10)
-        max = c + '0';
-    else 
-        max = base - 10 + 'a';
-    if (c >= '0' && c <= '9' && c <= max)
-        return (c - '0');
-    else if (c >= 'a' && c <= 'f' && c <= max)
-        return (c + 10 - 'a');
-    else
-        return -1;
-}
+    i = 0;
 
-int ft_atoi_base(char *s, int base)
-{
-    int sign = 1;
-    int res = 0;
-    int digit;
+	while (i < MAXLIST)
+    { 
+		parsed[i] = strsep(&str, " "); 
 
-    if (*s == '-')
-    {
-        sign = -1;
-        s++;
-    }
+		if (parsed[i] == NULL) 
+			break; 
+		if (ft_strlen(parsed[i]) == 0) 
+			i--; 
+        i++; 
+	} 
+} 
 
-    while((digit = get_digit(to_lower(*s), base)) > 0)
-    {
-        res = (res * base);
-        res = (res * sign) + digit;
-        s++;
-    }
-    return res;
-}
+
+int parsePipe(char* str, char** strpiped) 
+{ 
+    int i; 
+
+	i = 0;
+    while(i < 2)
+	{ 
+        strpiped[i] = strsep(&str, "|"); 
+        if (strpiped[i] == NULL) 
+            break; 
+		i++;
+    } 
+  
+    if (strpiped[1] == NULL) 
+        return 0; // returns zero if no pipe is found. 
+    else { 
+        return 1; 
+    } 
+} 
+
+int processString(char* str, char** parsed, char** parsedpipe) 
+{ 
+
+	char* strpiped[2]; 
+	int piped = 0; 
+
+	piped = parsePipe(str, strpiped); 
+
+	if (piped) { 
+		parseSpace(strpiped[0], parsed); 
+		parseSpace(strpiped[1], parsedpipe); 
+
+	} else { 
+
+		parseSpace(str, parsed); 
+	} 
+
+	if (ownCmdHandler(parsed)) 
+		return 0; 
+	else
+		return 1 + piped; 
+} 

@@ -47,19 +47,32 @@
 // 	return (0);
 // }
 
-int main(int argc, char **argv)
-{
-	if (argc != 2)
-	{
-		printf("This program does not accept arguments\n");
-		return (0);
-	}
-	if (!ft_strcmp(argv[1], "pwd") || !ft_strcmp(argv[1], "PWD"))
-		pwd_check(argv[1]);
-	else if (!ft_strcmp(argv[1], "cd") || !ft_strcmp(argv[1], "CD"))
-		check_cd(argv[1]);
-	else
-	{
-		printf("Argument not found\n");
-	}
-}
+
+int main() 
+{ 
+	char inputString[MAXCOM], *parsedArgs[MAXLIST]; 
+	char* parsedArgsPiped[MAXLIST]; 
+	int execFlag = 0; 
+
+	while (1) { 
+		// print shell line 
+		printDir(); 
+		// take input 
+		if (takeInput(inputString)) 
+			continue; 
+		// process 
+		execFlag = processString(inputString, parsedArgs, parsedArgsPiped); 
+		// execflag returns zero if there is no command 
+		// or it is a builtin command, 
+		// 1 if it is a simple command 
+		// 2 if it is including a pipe. 
+
+		// execute 
+		if (execFlag == 1) 
+			execArgs(parsedArgs); 
+
+		if (execFlag == 2) 
+			execArgsPiped(parsedArgs, parsedArgsPiped); 
+	} 
+	return 0; 
+} 

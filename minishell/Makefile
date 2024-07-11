@@ -13,16 +13,18 @@ BUILT-INS	:= 	built-ins/cd.c \
 # 				built-ins/echo.c \
 # 				built-ins/unset.c 
 
-# TOKENIZING	:= 	tokenizing/tokenizing.c
+SYSTEM		:= 	system/system.c
 
 # CLEAN		:=	clean/clean.c
 
-# EXECUTION	:= 	execution/execution.c \
+EXECUTION	:= 	execution/execution.c \
 # 				execution/readline.c
  
 START		:= 	start/start.c
 
-# PARSING		:=	parsing/parsing.c
+PARSING		:=	parsing/parsing.c \
+				parsing/pipe.c \
+				parsing/input.c \
 
 # SIGNALS		:=	signals/signals.c
 
@@ -30,12 +32,16 @@ UTILS		:=	utils/utils.c
 
 SRC			:= 	$(UTILS) \
 				$(START) \
-				$(BUILT-INS)
+				$(BUILT-INS) \
+				$(PARSING) \
+				$(EXECUTION) \
+				$(SYSTEM)
 
 OBJS		:= $(SRC:.c=.o)
 
+READLINE_PATH	:= /path/lib/readline
 %.o: %.c
-	$(CC) $(FLAGS) -c $< -o $@ -Iinclude
+	$(CC) $(FLAGS) -c $< -o $@ -Iinclude -I$(READLINE_PATH)/include
 
 all: $(NAME)
 
@@ -43,7 +49,7 @@ $(LIBFT):
 		make -C $(LIBFT_PATH)
 
 $(NAME): $(OBJS) $(LIBFT)
-		$(CC) $(OBJS) -L$(LIBFT_PATH) -lft -o $(NAME)
+		$(CC) $(OBJS) -L$(LIBFT_PATH) -lft -L$(READLINE_PATH)/lib -lreadline -o $(NAME)
 
 clean:
 		$(MAKE) clean -C $(LIBFT_PATH)

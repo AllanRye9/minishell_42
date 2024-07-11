@@ -1,11 +1,9 @@
 #include "../include/minishell.h"
 
-void check_cd(char *path)
-{
-    if (ft_strcmp(path, "cd") == 0 && !path)
-        return;
-    else if (ft_strcmp(path, "cd") == 0 && path)
-        chdir(path);
-    else
-        printf("Directory not found!");
-}
+// Function to print Current Directory. 
+void printDir() 
+{ 
+	char cwd[1024]; 
+	getcwd(cwd, sizeof(cwd)); 
+	printf("@%s %s", getenv("USER"), cwd); 
+} 
