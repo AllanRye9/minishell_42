@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/10 19:04:31 by oallan           ###   ########.fr       */
+/*   Updated: 2024/07/11 22:07:09 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # include "colors.h"
 # include "libft.h"
 
-#define MAXCOM 1000 // max number of letters to be supported 
-#define MAXLIST 100 // max number of commands to be supported 
+#define MAXCOM 1000 // max number of letters to be supported
+#define MAXLIST 100 // max number of commands to be supported
 
 // Clearing the shell using escape sequences 
 #define clear() printf("\033[H\033[J") 
