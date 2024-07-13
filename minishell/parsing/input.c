@@ -6,9 +6,9 @@ int takeInput(char* str)
 	char* buf; 
 
 	buf = readline("$ "); 
-	if (strlen(buf) != 0) { 
+	if (ft_strlen(buf) != 0) { 
 		add_history(buf); 
-		strcpy(str, buf); 
+		ft_strcpy(str, buf); 
 		return 0; 
 	} else { 
 		return 1; 

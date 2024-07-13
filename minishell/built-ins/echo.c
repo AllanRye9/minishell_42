@@ -1,44 +1,56 @@
 #include "../include/minishell.h"
 
-static char to_lower(char c)
+static int check_options(char *args)
 {
-    if (c >= 'A' && c <= 'Z')
-            return (c + 32);
-    return c;
+    int i = 0;
+    if (args[i] == '-')
+        return (0);
+    i++;
+    while (args[i])
+    {
+        if (args[i] != '\n')
+            return (0);
+        i++;
+    }
+    return (1);
 }
 
-static int get_digit(char c, int base)
-{
-    int max;
-    if (base <= 10)
-        max = c + '0';
-    else 
-        max = base - 10 + 'a';
-    if (c >= '0' && c <= '9' && c <= max)
-        return (c - '0');
-    else if (c >= 'a' && c <= 'f' && c <= max)
-        return (c + 10 - 'a');
-    else
-        return -1;
+// Function to print an environment variable
+static void print_env_var(char* var) {
+    char* value = getenv(var);
+    if (value) {
+        ft_putstr_fd(value, 1);
+    } else {
+        ft_putstr_fd("", 1); // Print nothing if the variable is not set
+    }
 }
 
-int ft_atoi_base(char *s, int base)
-{
-    int sign = 1;
-    int res = 0;
-    int digit;
+void ft_echo(char** args) {
+    int i = 0;
+    int opt = 0;
 
-    if (*s == '-')
-    {
-        sign = -1;
-        s++;
+    // Check for -n option
+    if (args[i] && check_options(args[i])) {
+        opt = 1;
+        i++;
     }
 
-    while((digit = get_digit(to_lower(*s), base)) > 0)
-    {
-        res = (res * base);
-        res = (res * sign) + digit;
-        s++;
+    // Print the arguments
+    while (args[i]) {
+        if (args[i][0] == '$') {
+            print_env_var(&args[i][1]); // Print environment variable
+        } else {
+            ft_putstr_fd(args[i], 1);
+        }
+
+        if (args[i + 1]) // Print a space if there are more arguments
+            ft_putstr_fd(" ", 1);
+        
+        i++;
     }
-    return res;
+
+    // Print newline unless -n option was used
+    if (!opt) {
+        ft_putstr_fd("\n", 1);
+    }
 }

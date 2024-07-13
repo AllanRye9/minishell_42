@@ -6,11 +6,11 @@ LIBFT_PATH	:= "libft"
 
 BUILT-INS	:= 	built-ins/cd.c \
 				built-ins/pwd.c \
+				built-ins/echo.c \
 # 				built-ins/env_utils.c \
 # 				built-ins/env.c \
 # 				built-ins/exit.c \
 # 				built-ins/export.c \
-# 				built-ins/echo.c \
 # 				built-ins/unset.c 
 
 SYSTEM		:= 	system/system.c
@@ -22,20 +22,24 @@ EXECUTION	:= 	execution/execution.c \
  
 START		:= 	start/start.c
 
+TOKENIZATION := tokenization/tokenizing.c \
+				tokenization/tokenized_utils.c \
+
 PARSING		:=	parsing/parsing.c \
 				parsing/pipe.c \
 				parsing/input.c \
 
 # SIGNALS		:=	signals/signals.c
 
-UTILS		:=	utils/utils.c
+UTILS		:=	utils/utils.c \
 
 SRC			:= 	$(UTILS) \
 				$(START) \
+				$(TOKENIZATION) \
 				$(BUILT-INS) \
 				$(PARSING) \
 				$(EXECUTION) \
-				$(SYSTEM)
+				$(SYSTEM) 
 
 OBJS		:= $(SRC:.c=.o)
 

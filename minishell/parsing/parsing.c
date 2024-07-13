@@ -7,9 +7,9 @@ void parseSpace(char* str, char** parsed)
 
     i = 0;
 
-	while (i < MAXLIST)
+	while (i < MAXCMD)
     { 
-		parsed[i] = strsep(&str, " "); 
+		parsed[i] = ft_strsep(&str, 32); 
 
 		if (parsed[i] == NULL) 
 			break; 
@@ -57,8 +57,29 @@ int processString(char* str, char** parsed, char** parsedpipe)
 		parseSpace(str, parsed); 
 	} 
 
-	if (ownCmdHandler(parsed)) 
+	if (CmdHandler(parsed)) 
 		return 0; 
 	else
 		return 1 + piped; 
 } 
+
+// Function to split a string by a delimiter character and return the next token
+char* ft_strsep(char **str, char c) {
+    char *start = *str; // Start of the string
+    char *ptr;
+
+    if (!start) {
+        return NULL; // If str is NULL, there is no token to return
+    }
+
+    // Find the delimiter in the string
+    ptr = ft_strchr(start, c);
+    if (ptr) {
+        *ptr = '\0';  // Replace delimiter with null character to terminate the token
+        *str = ptr + 1; // Move the pointer to the character after the delimiter
+    } else {
+        *str = NULL; // No more tokens
+    }
+
+    return start; // Return the token
+}

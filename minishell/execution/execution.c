@@ -25,38 +25,30 @@
 // }
 
 // Function to execute builtin commands 
-int ownCmdHandler(char** parsed) 
+int CmdHandler(char** parsed) 
 { 
-	int NoOfOwnCmds = 4, i, switchOwnArg = 0; 
-	char* ListOfOwnCmds[NoOfOwnCmds]; 
-	char* username; 
+	int NoOfCmds = 2, i, flag = 0; 
+	char* Handler[NoOfCmds]; 
 
-	ListOfOwnCmds[0] = "exit"; 
-	ListOfOwnCmds[1] = "cd"; 
-	ListOfOwnCmds[2] = "help"; 
-	ListOfOwnCmds[3] = "hello"; 
+	Handler[0] = "exit"; 
+	Handler[1] = "cd";
 
-	for (i = 0; i < NoOfOwnCmds; i++) { 
-		if (ft_strcmp(parsed[0], ListOfOwnCmds[i]) == 0) { 
-			switchOwnArg = i + 1; 
+	i = 0;
+	while(i < NoOfCmds)
+	{ 
+		if (ft_strcmp(parsed[0], Handler[i]) == 0)
+		{ 
+			flag = i + 1; 
 			break; 
-		} 
+		}
+		i++; 
 	} 
-
-	switch (switchOwnArg) { 
-	case 1: 
-		exit(0); 
-	case 2: 
-		chdir(parsed[1]); 
+	if (flag == 1)
+		exit(0);
+	else if (flag == 2)
+	{
+		chdir(parsed[1]);
 		return 1;
-	case 4: 
-		username = getenv("USER"); 
-		printf("%s\n", username); 
-		return 1; 
-	default: 
-		break; 
-	} 
-
+	}
 	return 0; 
 } 
-

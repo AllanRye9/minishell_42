@@ -50,8 +50,9 @@
 
 int main() 
 { 
-	char inputString[MAXCOM], *parsedArgs[MAXLIST]; 
-	char* parsedArgsPiped[MAXLIST]; 
+	char inputString[MAXWORDS];
+	char *parsedArgs[MAXCMD]; 
+	char* parsedArgsPiped[MAXCMD]; 
 	int execFlag = 0; 
 
 	while (1) { 
