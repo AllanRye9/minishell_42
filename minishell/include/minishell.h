@@ -34,13 +34,21 @@
 // Clearing the shell using escape sequences 
 #define clear() printf("\033[H\033[J") 
 
+
+// Structure to hold the last two exit statuses
+typedef struct {
+    int lastExitStatus1;
+    int lastExitStatus2;
+} ExitStatuses;
+
+
 int             ft_strcmp(char *s, char *s1);
-void            printDir();
 int             parsePipe(char* str, char** strpiped) ;;
 void            parseSpace(char* str, char** parsed);
 char*           ft_strsep(char **str, char c);
 char*           ft_strchr(const char *str, int c);
-void            execArgs(char** parsed);
+void            execArgs(char** parsed, ExitStatuses* exitStatuses);
+void            handleEcho(char** parsed, ExitStatuses* exitStatuses);
 int             processString(char* str, char** parsed, char** parsedpipe);
 int             takeInput(char* str);
 void            execArgsPiped(char** parsed, char** parsedpipe);

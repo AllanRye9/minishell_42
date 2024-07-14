@@ -48,19 +48,26 @@
 // }
 
 
-int main() 
+int main(int argc, char **argv) 
 { 
+	(void)argc;
+	(void)argv;
 	char inputString[MAXWORDS];
 	char *parsedArgs[MAXCMD]; 
-	char* parsedArgsPiped[MAXCMD]; 
+	char* parsedArgsPiped[MAXCMD];
 	int execFlag = 0; 
+	ExitStatuses *turned;
 
-	while (1) { 
+	turned = (ExitStatuses *)malloc(sizeof(ExitStatuses) * MAXWORDS);
+	if (!turned)
+		free(turned);
+
+    // infinite loop to take commands
+	while (1) {
 		// print shell line 
-		printDir(); 
-		// take input 
-		if (takeInput(inputString)) 
-			continue; 
+		printf("minishell"); 
+		if (takeInput(inputString))
+			continue;
 		// process 
 		execFlag = processString(inputString, parsedArgs, parsedArgsPiped); 
 		// execflag returns zero if there is no command 
@@ -70,8 +77,8 @@ int main()
 
 		// execute 
 		if (execFlag == 1) 
-			execArgs(parsedArgs); 
-
+			execArgs(parsedArgs, turned);
+		handleEcho(parsedArgs,turned);
 		if (execFlag == 2) 
 			execArgsPiped(parsedArgs, parsedArgsPiped); 
 	} 

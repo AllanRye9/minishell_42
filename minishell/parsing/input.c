@@ -3,14 +3,17 @@
 // Function to take input 
 int takeInput(char* str) 
 { 
-	char* buf; 
+	char* buf;
 
-	buf = readline("$ "); 
-	if (ft_strlen(buf) != 0) { 
+	buf = readline(">>> ");
+	while (*buf && (*buf == ' ' || *buf == '\t' || *buf == '\n'))
+		buf++;
+	if (ft_strlen(buf) != 0)
+	{ 
 		add_history(buf); 
-		ft_strcpy(str, buf); 
+		ft_strcpy(str, buf);
 		return 0; 
-	} else { 
+	}
+	else 
 		return 1; 
-	} 
 } 

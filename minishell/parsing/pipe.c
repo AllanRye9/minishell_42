@@ -8,12 +8,12 @@ void execArgsPiped(char** parsed, char** parsedpipe)
 	pid_t p1, p2; 
 
 	if (pipe(pipefd) < 0) { 
-		printf("Pipe could not be initialized"); 
+		printf("\nPipe could not be initialized"); 
 		return; 
 	} 
 	p1 = fork(); 
 	if (p1 < 0) { 
-		printf("Could not fork"); 
+		printf("\nCould not fork"); 
 		return; 
 	} 
 
@@ -24,8 +24,8 @@ void execArgsPiped(char** parsed, char** parsedpipe)
 		dup2(pipefd[1], STDOUT_FILENO); 
 		close(pipefd[1]); 
 
-		if (execvp(parsed[0], parsed) < 0) { 
-			printf("Could not execute command 1.."); 
+		if (ft_execvp(parsed[0], parsed) < 0) { 
+			printf("\nCould not execute command 1.."); 
 			exit(0); 
 		} 
 	} else { 
@@ -33,7 +33,7 @@ void execArgsPiped(char** parsed, char** parsedpipe)
 		p2 = fork(); 
 
 		if (p2 < 0) { 
-			printf("Could not fork"); 
+			printf("\nCould not fork"); 
 			return; 
 		} 
 
@@ -43,8 +43,8 @@ void execArgsPiped(char** parsed, char** parsedpipe)
 			close(pipefd[1]); 
 			dup2(pipefd[0], STDIN_FILENO); 
 			close(pipefd[0]); 
-			if (execvp(parsedpipe[0], parsedpipe) < 0) { 
-				printf("Could not execute command 2.."); 
+			if (ft_execvp(parsedpipe[0], parsedpipe) < 0) { 
+				printf("\nCould not execute command 2.."); 
 				exit(0); 
 			} 
 		} else { 

@@ -4,6 +4,6 @@ void pwd_check(char *path)
 {
     char *str;
 
-    str = getcwd(path, 100);
+    str = getcwd(path, ft_strlen(path));
     printf("%s\n", str);
 }
