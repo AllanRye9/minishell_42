@@ -22,25 +22,26 @@
 # include <signal.h>
 # include <dirent.h>
 # include <unistd.h>
+# include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "colors.h"
+# include "parsing.h"
 # include "libft.h"
 # include <errno.h>
 
-#define MAXWORDS 1000 // max number of letters to be supported
-#define MAXCMD 100 // max number of commands to be supported
-
+# define MAXWORDS 1000 // max number of letters to be supported
+# define MAXCMD 100 // max number of commands to be supported
+# define STDERR 2
 // Clearing the shell using escape sequences 
-#define clear() printf("\033[H\033[J") 
-
+# define clear() printf("\033[H\033[J") 
+# define STDERR 2
 
 // Structure to hold the last two exit statuses
 typedef struct {
     int lastExitStatus1;
     int lastExitStatus2;
 } ExitStatuses;
-
 
 int             ft_strcmp(char *s, char *s1);
 int             parsePipe(char* str, char** strpiped) ;;
@@ -49,6 +50,7 @@ char*           ft_strsep(char **str, char c);
 char*           ft_strchr(const char *str, int c);
 void            execArgs(char** parsed, ExitStatuses* exitStatuses);
 void            handleEcho(char** parsed, ExitStatuses* exitStatuses);
+void            ft_echo(char **args);
 int             processString(char* str, char** parsed, char** parsedpipe);
 int             takeInput(char* str);
 void            execArgsPiped(char** parsed, char** parsedpipe);
@@ -59,4 +61,6 @@ char            *ft_strcpy(char *d, char *s);
 char            *ft_strtok(char *s, char *delim);
 size_t          ft_strspn(char *start, char *delim);
 size_t          ft_strcspn(char *start, char *delim);
+//signal handling.
+void	sig_handler(int code);
 #endif

@@ -62,5 +62,4 @@ typedef struct cmds
 	t_lexer		*redirect;
 	struct cmds	*next;
 }	t_cmds;
-
 #endif

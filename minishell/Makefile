@@ -29,7 +29,7 @@ PARSING		:=	parsing/parsing.c \
 				parsing/pipe.c \
 				parsing/input.c \
 
-# SIGNALS		:=	signals/signals.c
+SIGNALS		:=	signals/signals.c
 
 UTILS		:=	utils/utils.c \
 
@@ -39,7 +39,8 @@ SRC			:= 	$(UTILS) \
 				$(BUILT-INS) \
 				$(PARSING) \
 				$(EXECUTION) \
-				$(SYSTEM) 
+				$(SYSTEM) \
+				$(SIGNALS) 
 
 OBJS		:= $(SRC:.c=.o)
 
