@@ -5,7 +5,12 @@ int takeInput(char* str)
 { 
 	char* buf;
 
-	buf = readline(">>> ");
+	buf = readline("minishell>>> ");
+	if (buf == NULL)
+    {
+		printf("\n");
+		exit(0);
+	}
 	while (*buf && (*buf == ' ' || *buf == '\t' || *buf == '\n'))
 		buf++;
 	if (ft_strlen(buf) != 0)
@@ -15,5 +20,6 @@ int takeInput(char* str)
 		return 0; 
 	}
 	else 
-		return 1; 
+		return 1;
+	free(buf);
 } 

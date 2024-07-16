@@ -67,8 +67,11 @@ int CmdHandler(char** parsed)
             // Print the rest of the arguments to echo
             i = 1;
             int flag;
+            if (parsed[i] == NULL)
+                flag = 0;
             while (parsed[i] != NULL) {
-				if (parsed[i][0] =='-')
+				if (parsed[i][0] =='-' || parsed[i][1] ==' '
+                || parsed[i][0] =='\t')
 				{
                     i++;
                     flag = 1;

@@ -55,17 +55,21 @@ int main(int argc, char **argv)
 	char inputString[MAXWORDS];
 	char *parsedArgs[MAXCMD]; 
 	char* parsedArgsPiped[MAXCMD];
-	int execFlag = 0; 
+	int execFlag = 0;
+
 	ExitStatuses *turned;
 
 	turned = (ExitStatuses *)malloc(sizeof(ExitStatuses) * MAXWORDS);
 	if (!turned)
 		free(turned);
-
+	
     // infinite loop to take commands
 	while (1) {
-		// print shell line 
-		printf("minishell"); 
+		// print shell line
+		if (signal(SIGINT, sig_handler))
+			ft_putstr_fd("\b", STDERR);
+		else if (signal(SIGQUIT, sig_handler))
+			ft_putstr_fd("\b", STDERR);
 		if (takeInput(inputString))
 			continue;
 		// process 
