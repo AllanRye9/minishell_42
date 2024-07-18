@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/18 11:57:08 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/18 17:58:38 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include "libft.h"
 # include <errno.h>
 # include "parsing.h"
+# include "tokenizing.h"
 
 # define MAXWORDS 1000 // max number of letters to be supported
 # define MAXCMD 100 // max number of commands to be supported
