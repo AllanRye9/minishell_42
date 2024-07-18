@@ -1,8 +1,5 @@
 #include "../include/minishell.h"
-
-<<<<<<< HEAD
  
-=======
 void	change_home_dir(t_sysvar *sys_var, char *str)
 {
 	char	*dir;
@@ -15,4 +12,3 @@ int	change_dir(t_sysvar *sys_var, t_cmds *cmds)
 	if (!cmds->str[1])
 		change_home_dir(sys_var, "HOME=");
 }
->>>>>>> daf2347 (working on builtins)
