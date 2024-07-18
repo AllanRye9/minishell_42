@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:48:10 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/11 22:43:12 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:01:09 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct parser
 	struct s_tools	*tools;
 }	t_parser;
 
-typedef struct sys_tools
+typedef struct sys_variable
 {
 	char			*args;
 	char			**paths;
@@ -50,9 +50,9 @@ typedef struct sys_tools
 	char			*old_pwd;
 	int				pipes;
 	int				*pid;
-	bool			heredoc;
-	bool			reset;
-}	t_systools;
+	int				heredoc;
+	int				reset;
+}	t_sysvar;
 
 typedef struct cmds
 {
