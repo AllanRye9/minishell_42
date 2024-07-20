@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/18 17:58:38 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/20 15:55:39 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,11 @@ size_t          ft_strspn(char *start, char *delim);
 size_t          ft_strcspn(char *start, char *delim);
 //signal handling.
 void	sig_handler(int code);
+
+
+//Builtins functions
+void	change_path(t_sysvar *sys_var);
+int		change_dir(t_sysvar *sysvar, char *path);
+void	add_path_to_env(t_sysvar *sys_var);
+
 #endif

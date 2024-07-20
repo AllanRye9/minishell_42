@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:48:10 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/18 18:44:35 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/20 15:38:40 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ typedef struct sys_variable
 	char			**env;
 	char			**path;
 	t_env			*env;
+	char			*pwd; //need to initialize during parsing.
+	char			*old_pwd;
 	bool			heredoc_sigint;
 }	t_sysvar;
 
