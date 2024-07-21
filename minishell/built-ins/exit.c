@@ -1,44 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/21 11:35:05 by sbartoul          #+#    #+#             */
+/*   Updated: 2024/07/21 15:48:20 by sbartoul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
-static char to_lower(char c)
+void	exit_with_code(char **args)
 {
-    if (c >= 'A' && c <= 'Z')
-            return (c + 32);
-    return c;
+	int	exit_code;
+
+	if (!args[1])
+		exit_code = 0;
+	else if (is_digit(args[1]))
+		exit_code = ft_atoi(args[1]);
+	else
+	{
+		ft_putstr_fd("minishell: exit:", STDERR_FILENO);
+		ft_putstr_fd(args[1], STDERR_FILENO);
+		ft_putendl_fd(": -n where n is a numeric", STDERR_FILENO);
+		exit_code = -1;
+	}
+	free_arr(args);
+	exit(exit_code);
 }
 
-static int get_digit(char c, int base)
+int	custom_exit(t_sysvar *sys_var, char **args)
 {
-    int max;
-    if (base <= 10)
-        max = c + '0';
-    else 
-        max = base - 10 + 'a';
-    if (c >= '0' && c <= '9' && c <= max)
-        return (c - '0');
-    else if (c >= 'a' && c <= 'f' && c <= max)
-        return (c + 10 - 'a');
-    else
-        return -1;
-}
-
-int ft_atoi_base(char *s, int base)
-{
-    int sign = 1;
-    int res = 0;
-    int digit;
-
-    if (*s == '-')
-    {
-        sign = -1;
-        s++;
-    }
-
-    while((digit = get_digit(to_lower(*s), base)) > 0)
-    {
-        res = (res * base);
-        res = (res * sign) + digit;
-        s++;
-    }
-    return res;
+	if (args[1] && args[2])
+	{
+		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
+		return (EXIT_FAILURE);
+	}
+	free_sysvar(sys_var); //Not freed everything will come back for this later.
+	exit_with_code(args);
+	return (EXIT_SUCCESS);
 }
