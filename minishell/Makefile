@@ -16,7 +16,7 @@ BUILTINS	:=	builtins/cd.c \
 				builtins/pwd.c \
 				builtins/unset.c
 
-CLEANING	:=	cleaning/ft_clean_ms.c
+CLEAN		:=	clean/clean.c
 
 EXEC		:=	exec/error_msg.c \
 				exec/exec_builtin.c \
@@ -56,7 +56,7 @@ START		:=  start/main.c
 SIGNALS		:= signals/signals.c
 
 SRCS		:=	$(BUILTINS)\
-				$(CLEANING)\
+				$(CLEAN)\
 				$(EXEC)\
 				$(UTILS)\
 				$(PARSING)\
