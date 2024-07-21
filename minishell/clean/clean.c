@@ -1,44 +1,37 @@
-#include "../include/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_clean_ms.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/17 11:51:13 by abelayad          #+#    #+#             */
+/*   Updated: 2023/06/18 16:39:05 by abelayad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static char to_lower(char c)
+#include "minishell.h"
+
+static void	ft_clear_envlst(void)
 {
-    if (c >= 'A' && c <= 'Z')
-            return (c + 32);
-    return c;
+	t_env	*envlst;
+	t_env	*envlst_tofree;
+
+	envlst = g_minishell.envlst;
+	while (envlst)
+	{
+		envlst_tofree = envlst;
+		envlst = envlst->next;
+		free(envlst_tofree);
+	}
+	g_minishell.envlst = NULL;
 }
 
-static int get_digit(char c, int base)
+void	ft_clean_ms(void)
 {
-    int max;
-    if (base <= 10)
-        max = c + '0';
-    else 
-        max = base - 10 + 'a';
-    if (c >= '0' && c <= '9' && c <= max)
-        return (c - '0');
-    else if (c >= 'a' && c <= 'f' && c <= max)
-        return (c + 10 - 'a');
-    else
-        return -1;
-}
-
-int ft_atoi_base(char *s, int base)
-{
-    int sign = 1;
-    int res = 0;
-    int digit;
-
-    if (*s == '-')
-    {
-        sign = -1;
-        s++;
-    }
-
-    while((digit = get_digit(to_lower(*s), base)) > 0)
-    {
-        res = (res * base);
-        res = (res * sign) + digit;
-        s++;
-    }
-    return res;
+	ft_garbage_collector(NULL, true);
+	ft_clear_ast(&g_minishell.ast);
+	ft_clear_envlst();
+	rl_clear_history();
+	tcsetattr(STDIN_FILENO, TCSANOW, &g_minishell.original_term);
 }

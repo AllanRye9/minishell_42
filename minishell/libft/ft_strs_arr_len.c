@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_str.c                                    :+:      :+:    :+:   */
+/*   ft_strs_arr_len.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/01 21:36:38 by oallan            #+#    #+#             */
-/*   Updated: 2024/01/05 16:56:59 by oallan           ###   ########.fr       */
+/*   Created: 2023/02/23 16:51:57 by abelayad          #+#    #+#             */
+/*   Updated: 2023/02/23 16:52:08 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-int	ft_printf_str(char *str)
+size_t	ft_strs_arr_len(char ***str)
 {
-	int	result;
+	size_t	i;
 
-	result = 0;
-	if (str == NULL)
-		return (ft_printf_str("(null)"));
-	while (*str)
-	{
-		result += ft_printf_char((int)*str);
-		str++;
-	}
-	return (result);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

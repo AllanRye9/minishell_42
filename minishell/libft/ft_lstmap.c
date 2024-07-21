@@ -1,32 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/27 21:18:48 by oallan            #+#    #+#             */
-/*   Updated: 2023/12/30 17:58:49 by oallan           ###   ########.fr       */
+/*   Created: 2022/10/22 00:30:22 by abelayad          #+#    #+#             */
+/*   Updated: 2023/02/02 17:20:05 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
+
+static void	*ft_handle_clr(t_list **head, void (*del)(void *))
+{
+	ft_lstclear(head, del);
+	return (NULL);
+}
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*pointer;
-	t_list	*record;
+	t_list	*head;
+	t_list	*nlst;
+	void	*content;
 
-	pointer = NULL;
+	if (!lst || !f || !del)
+		return (NULL);
+	content = f(lst -> content);
+	head = ft_lstnew(content);
+	if (!head)
+		return (del(content), ft_handle_clr(&head, del), NULL);
+	nlst = head;
+	lst = lst -> next;
 	while (lst)
 	{
-		record = ft_lstnew(f(lst->content));
-		if (!(record))
-		{
-			ft_lstclear(&pointer, del);
-			return (0);
-		}
-		ft_lstadd_back(&pointer, record);
-		lst = lst->next;
+		content = f(lst -> content);
+		nlst -> next = ft_lstnew(content);
+		nlst = nlst -> next;
+		if (!nlst)
+			return (del(content), ft_handle_clr(&head, del), NULL);
+		lst = lst -> next;
 	}
-	return (pointer);
+	nlst -> next = NULL;
+	return (head);
 }

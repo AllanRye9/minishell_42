@@ -3,38 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: abelayad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/23 18:37:43 by oallan            #+#    #+#             */
-/*   Updated: 2023/12/30 19:55:24 by oallan           ###   ########.fr       */
+/*   Created: 2022/10/08 18:04:32 by abelayad          #+#    #+#             */
+/*   Updated: 2022/10/22 00:42:06 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
+
+static int	ft_cmp(const char *s1, const char *s2, size_t len)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < len && s1[i] && s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (0);
+		i++;
+	}
+	if (!s2[i])
+		return (1);
+	return (0);
+}
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	char	*main_str;
-	char	*to_find;
 	size_t	i;
-	size_t	x;
 
+	if ((!haystack || !needle) && !len)
+		return (NULL);
+	if (!ft_strlen(needle))
+		return ((char *)haystack);
 	i = 0;
-	x = 0;
-	main_str = (char *)haystack;
-	to_find = (char *)needle;
-	if (to_find[0] == '\0')
-		return (main_str);
-	else if (main_str[0] == '\0' && to_find[0] == '\0')
-		return (0);
-	while (main_str[i] != '\0')
+	while (haystack[i] && i < len)
 	{
-		while (main_str[i + x] == to_find[x] && len > (i + x))
-		{
-			if (to_find[x + 1] == '\0')
-				return (&main_str[i]);
-			x++;
-		}
+		if (haystack[i] == needle[0])
+			if (ft_cmp(haystack + i, needle, len - i))
+				return ((char *)(haystack + i));
 		i++;
 	}
-	return (0);
+	return (NULL);
 }

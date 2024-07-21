@@ -3,59 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: abelayad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/26 19:17:12 by oallan            #+#    #+#             */
-/*   Updated: 2023/12/30 17:26:42 by oallan           ###   ########.fr       */
+/*   Created: 2022/10/13 20:55:39 by abelayad          #+#    #+#             */
+/*   Updated: 2022/10/13 21:02:34 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-static int	count(int nb)
+static char	*ft_filler(char *nums, int num_len, int sign)
 {
-	int			i;
-	long int	num;
+	size_t	i;
+	char	*str;
 
-	num = nb;
+	str = ft_calloc(sign + num_len + 1, sizeof(char));
+	if (!str)
+		return (NULL);
 	i = 0;
-	if (num == 0)
-		i++;
-	if (num < 0)
-	{
-		i++;
-		num *= -1;
-	}
-	while (num > 0)
-	{
-		i++;
-		num = num / 10;
-	}
-	return (i);
+	if (sign)
+		str[i++] = '-';
+	while (--num_len >= 0)
+		str[i++] = nums[num_len];
+	return (str);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*results;
-	int		num_len;
-	long	num;
+	int			sign;
+	char		nums[10];
+	char		*str;
+	int			i;
+	long int	num;
 
-	num_len = count(n);
 	num = n;
-	results = malloc(sizeof(char) * (num_len + 1));
-	if (!results)
-		return (0);
-	results[num_len--] = 0;
-	if (num == 0)
-		results[0] = '0';
-	if (num < 0)
+	sign = 0;
+	if (!num)
 	{
-		results[0] = '-';
-		num *= -1;
+		str = ft_calloc(2, sizeof(char));
+		if (!str)
+			return (NULL);
+		str[0] = '0';
+		return (str);
 	}
-	while (num > 0)
+	i = 0;
+	if (num < 0 && ++sign)
+		num *= -1;
+	while (num)
 	{
-		results[num_len--] = (num % 10) + '0';
+		nums[i++] = (num % 10) + '0';
 		num /= 10;
 	}
-	return (results);
+	return (ft_filler(nums, i, sign));
 }

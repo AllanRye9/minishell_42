@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: abelayad <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/21 19:03:29 by oallan            #+#    #+#             */
-/*   Updated: 2023/12/30 19:52:42 by oallan           ###   ########.fr       */
+/*   Created: 2022/10/07 23:37:23 by abelayad          #+#    #+#             */
+/*   Updated: 2022/10/21 23:58:22 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
@@ -16,13 +17,17 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	size_t	i;
 
 	i = 0;
-	while ((s1[i] != '\0' || s2[i] != '\0') && n > i)
+	if (n)
 	{
-		if (s1[i] < s2[i])
-			return (-1);
-		else if (s1[i] > s2[i])
-			return (1);
-		i++;
+		while (s1[i] && s2[i] && s1[i] == s2[i] && i < n - 1)
+			i++;
+		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 	}
 	return (0);
 }
+/**
+Pay attention that the comparison is done using unsigned char
+It doesn't really matter when checking for equality
+because it is going to be the same either way.
+But make sure to convert to unsigned char in the difference.
+*/

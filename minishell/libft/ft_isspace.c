@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_char.c                                   :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/01 21:40:10 by oallan            #+#    #+#             */
-/*   Updated: 2024/01/05 16:50:17 by oallan           ###   ########.fr       */
+/*   Created: 2023/04/10 23:08:27 by abelayad          #+#    #+#             */
+/*   Updated: 2023/04/10 23:12:20 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
-int	ft_printf_char(int c)
+int	ft_isspace(char c)
 {
-	return (write(1, &c, 1));
+	if (c == '\t' || c == '\n' || c == '\v'
+		|| c == '\f' || c == '\r' || c == ' ')
+		return (1);
+	return (0);
 }

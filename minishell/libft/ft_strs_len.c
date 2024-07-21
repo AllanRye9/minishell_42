@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strs_len.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: abelayad <abelayad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/02 19:06:12 by oallan            #+#    #+#             */
-/*   Updated: 2024/01/05 17:04:07 by oallan           ###   ########.fr       */
+/*   Created: 2023/02/21 13:17:44 by abelayad          #+#    #+#             */
+/*   Updated: 2023/02/23 16:52:13 by abelayad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-int	ft_printf(const char *form, ...)
+size_t	ft_strs_len(char **str)
 {
-	va_list	ap;
-	int		res;
+	size_t	i;
 
-	res = 0;
-	va_start(ap, form);
-	while (*form)
-	{
-		if (*form == '%')
-			res += ft_printf_specifier(*(++form), ap);
-		else
-			res += write(1, form, 1);
-		++form;
-	}
-	va_end(ap);
-	return (res);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
