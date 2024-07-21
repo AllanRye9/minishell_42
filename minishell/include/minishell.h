@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/21 15:50:49 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/21 15:53:12 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ void	sig_handler(int code);
 void	change_path(t_sysvar *sys_var);
 int		change_dir(t_sysvar *sysvar, char *path);
 void	add_path_to_env(t_sysvar *sys_var);
+int		env(t_sysvar *sys_var);
 int		is_digit(char *str);
 void	free_sysvar(t_sysvar *sys_var);
 void	free_doublearr(char **str);
+int		custom_exit(t_sysvar *sys_var, char **args);
 
 #endif
