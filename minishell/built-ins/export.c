@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 17:42:55 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/22 19:33:39 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:44:59 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,10 @@ int	variable_exist(t_sysvar *sys_var, char *argv)
 {
 	int	i;
 
-	i = -1;
-	while (i < 2)
+	i = 0;
+	while (argv[after_eql_sign(argv)] == '\"' && i < 2)
 	{
-		if (argv[after_eql_sign(argv)] == '\"')
-			delete_quotes(argv, '\"');
+		delete_quotes(argv, '\"');
 		i++;
 	}
 	i = -1;

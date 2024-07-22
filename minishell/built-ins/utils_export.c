@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:24:06 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/22 19:29:22 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:53:02 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,11 @@ char	**add_in_env(char **env, char **strings, char *argv)
 	i = -1;
 	while (env[++i] != NULL)
 	{
-		if (env[i + 1] == NULL)
-		{
-			strings[i] = ft_strdup(argv);
-			strings[i + 1] = ft_strdup(env[i]);
-		}
-		else
-			strings = ft_strdup(env[i]);
-		if (env[i] == NULL)
-		{
-			free_doublearr(strings);
-			return (strings);
-		}
+		strings[i] = ft_strdup(env[i]);
+		i++;
 	}
+	strings[i] = ft_strdup(argv);
+	strings[i + 1] = NULL;
 	return (strings);
 }
 
@@ -73,10 +65,9 @@ char	**add_var(char **env, char *argv)
 	int		i;
 
 	i = 0;
-	while (i < 3)
+	while (argv[after_eql_sign(argv)] == '\"' && i < 2)
 	{
-		if (argv[after_eql_sign(argv) == '\"'])
-			delete_quotes(argv, '\"');
+		delete_quotes(argv, '\"');
 		i++;
 	}
 	i = 0;
