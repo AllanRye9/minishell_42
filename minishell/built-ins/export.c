@@ -6,11 +6,20 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 17:42:55 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/22 13:30:10 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/22 16:52:54 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	valid_param(char *arg)
+{
+	int	i;
+
+	i = -1;
+	if (ft_isdigit(arg[0]) || arg[0] == '=' || )
+		return ()
+}
 
 int	custom_export(t_sysvar *sys_var, char **argv)
 {
