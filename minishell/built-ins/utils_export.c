@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:24:06 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/22 18:23:09 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:29:22 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	**add_in_env(char **env, char **strings, char *argv)
 	i = -1;
 	while (env[++i] != NULL)
 	{
-		if (env[i + 1] = NULL)
+		if (env[i + 1] == NULL)
 		{
 			strings[i] = ft_strdup(argv);
 			strings[i + 1] = ft_strdup(env[i]);

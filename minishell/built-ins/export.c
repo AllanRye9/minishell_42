@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 17:42:55 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/22 18:37:08 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:33:39 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	custom_export(t_sysvar *sys_var, char **argv)
 	char	**tmp;
 	int		i;
 
-	i = -1;
-	if (argv[1] || argv[1][0] == '\0')
+	i = 1;
+	if (!argv[1] || argv[1][0] == '\0')
 		env(sys_var);
 	else
 	{
