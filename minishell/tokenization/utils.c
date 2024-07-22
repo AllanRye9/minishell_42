@@ -42,5 +42,5 @@ void	ft_print_quote_err(char c)
 	ft_putstr_fd("minishell: unexpected EOF while looking for matching `", 2);
 	ft_putchar_fd(c, 2);
 	ft_putstr_fd("'\n", 2);
-	g_minishell.exit_s = 258;
+	G_shell_.exit_s = 258;
 }

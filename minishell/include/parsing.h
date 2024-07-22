@@ -31,7 +31,7 @@ typedef enum	node_type
 	N_PIPE,
 	N_AND,
 	N_OR,
-	N_CMD
+	N_COMMANDS
 }	t_node_type;
 
 typedef struct	env

@@ -38,10 +38,10 @@ UTILS	:=	utils/ft_asterisker.c \
 				utils/ft_strip_quotes.c \
 				utils/heredoc_expander.c
 
-PARSING		:=	parsing/parser_clear.c \
-				parsing/parser_err.c \
-				parsing/parser_helpers.c \
-				parsing/parser_nodes.c \
+PARSING		:=	parsing/clear.c \
+				parsing/err.c \
+				parsing/helpers.c \
+				parsing/nodes.c \
 				parsing/utils.c \
 				parsing/parser.c
 
