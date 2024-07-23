@@ -1,44 +1,60 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/22 21:28:39 by sbartoul          #+#    #+#             */
+/*   Updated: 2024/07/22 22:10:12 by sbartoul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
-static char to_lower(char c)
+int	check_key(char *args)
 {
-    if (c >= 'A' && c <= 'Z')
-            return (c + 32);
-    return c;
+	int	i;
+
+	i = -1;
+	if (!ft_isalpha(*args) && *args != '_')
+		return (0);
+	while (args[i] && args[i] != '=')
+	{
+		if (!ft_isalnum(args[i]) && args[i] != '_')
+			return (0);
+	}
+	return (1);
 }
 
-static int get_digit(char c, int base)
+int	unset(t_sysvar *sys_var, char **args)
 {
-    int max;
-    if (base <= 10)
-        max = c + '0';
-    else 
-        max = base - 10 + 'a';
-    if (c >= '0' && c <= '9' && c <= max)
-        return (c - '0');
-    else if (c >= 'a' && c <= 'f' && c <= max)
-        return (c + 10 - 'a');
-    else
-        return -1;
-}
+	int	i;
+	int	ret_val;
 
-int ft_atoi_base(char *s, int base)
-{
-    int sign = 1;
-    int res = 0;
-    int digit;
-
-    if (*s == '-')
-    {
-        sign = -1;
-        s++;
-    }
-
-    while((digit = get_digit(to_lower(*s), base)) > 0)
-    {
-        res = (res * base);
-        res = (res * sign) + digit;
-        s++;
-    }
-    return res;
+	i = 1;
+	if (!args[1])
+		return (0);
+	ret_val = 0;
+	while (args[i])
+	{
+		if (!check_key(args[i]))
+		{
+			ft_putstr_fd("minishell: unset: ", STDERR_FILENO);
+			ft_putstr_fd(args[i], STDERR_FILENO);
+			ft_putendl_fd(": not a valid identifier", STDERR_FILENO);
+			ret_val = 1;
+		}
+		else
+		{
+			if (unsetenv(args[i]) != 0)
+			{
+				ft_putstr_fd("minishell: unset error clearing variables", STDERR_FILENO);
+				ft_putendl_fd(args[i], 2);
+				ret_val = 1;
+			}
+		}
+		i++;
+	}
+	return (ret_val);
 }
