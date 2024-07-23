@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:31:48 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/10 19:05:44 by oallan           ###   ########.fr       */
+/*   Updated: 2024/07/23 13:20:43 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int main(int argc, char **argv)
 		// 2 if it is including a pipe. 
 
 		// execute 
-		if (execFlag == 1) 
+		if (execFlag == 1)
 			execArgs(parsedArgs, turned);
 		handleEcho(parsedArgs,turned);
 		if (execFlag == 2) 
