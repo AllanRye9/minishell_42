@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:31:48 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/23 13:20:43 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/23 15:08:26 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 // }
 
 
-int main(int argc, char **argv) 
+int main(int argc, char **argv, char **env) 
 { 
 	(void)argc;
 	(void)argv;
