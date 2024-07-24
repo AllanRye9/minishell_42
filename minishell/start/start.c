@@ -6,88 +6,64 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:31:48 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/23 15:08:26 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/24 10:04:58 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// int	main(int argc, char *argv[], char *envp[])
-// {
-	// char	*line;
-	// t_data	*data;
+static void	init_environment(char **env, t_sysvar *sys_var)
+{
+	ft_memset(sys_var, 0, sizeof(t_sysvar));
+	sys_var->env = env;
+	ft_init_env();
+	sys_var->stdin = dup(0);
+	sys_var->stdout = dup(1);
+	get_attribute(STDIN_FILENO, sys_var.original_term);  //need to work here no original term declared yet.
+}
 
-	// if (argc != 1)
-	// {
-	// 	printf("This program does not accept arguments\n");
-	// 	return (0);
-	// }
-	// char *s;
-	// if (argc == 1)
-	// 	printf("%s\n", getcwd(s, 100));
-	// else
-	// {
-	// 	if (ft_strcmp(argv[1], "cd") && argv[2])
-	// 		chdir(argv[2]);
-	// 	else
-	// 		printf("Directory not found!");
-	// }
-	// signal_handler();
-	// while (!SIG_QUIT && cmd != NULL)
-	// {
-	// 	line = readline(PROMPT_MSG);
-	// 	if (line == NULL || !ft_strcmp(line, "exit"))
-	// 		exit(0);
-	// 	if (lexer(line))
-	// 	{
-	// 		data = parser(line, envp);
-	// 		execution(data, envp);
-	// 	}
-	// }
-// 	return (0);
-// }
+static void	ft_exec(t_sysvar *sys_var)
+{
+	signal(SIGQUIT, sigquit_handler);
+	ft_init_tree(sys_var->node);
+	if (sys_var->heredoc_sigint)
+	{
+		ft_clear_node(sys_var->node);
+		sys_var->heredoc_sigint = false;
+	}
+	set_attribute(STDIN_FILENO, 2, sys_var.orignal_term);
+	sys_var->exit_status = ft_exec_node(sys_var->node, false);
+	ft_clear_node(sys_var->node);
+}
 
 
-<<<<<<< HEAD
-=======
-int main(int argc, char **argv, char **env) 
-{ 
-	(void)argc;
-	(void)argv;
-	char inputString[MAXWORDS];
-	char *parsedArgs[MAXCMD]; 
-	char* parsedArgsPiped[MAXCMD];
-	int execFlag = 0;
+int main(int argc, char **argv, char **env) {
+    t_sysvar sys_var;
 
-	ExitStatuses *turned;
-
-	turned = (ExitStatuses *)malloc(sizeof(ExitStatuses) * MAXWORDS);
-	if (!turned)
-		free(turned);
-	
-    // infinite loop to take commands
-	while (1) {
-		// print shell line
-		if (signal(SIGINT, sig_handler))
-			ft_putstr_fd("\b", STDERR);
-		else if (signal(SIGQUIT, sig_handler))
-			ft_putstr_fd("\b", STDERR);
-		if (takeInput(inputString))
-			continue;
-		// process 
-		execFlag = processString(inputString, parsedArgs, parsedArgsPiped); 
-		// execflag returns zero if there is no command 
-		// or it is a builtin command, 
-		// 1 if it is a simple command 
-		// 2 if it is including a pipe. 
-
-		// execute 
-		if (execFlag == 1)
-			execArgs(parsedArgs, turned);
-		handleEcho(parsedArgs,turned);
-		if (execFlag == 2) 
-			execArgsPiped(parsedArgs, parsedArgsPiped); 
-	} 
-	return 0; 
-} 
->>>>>>> 929b7929ab53b07282f6833ade9ddfaaeee3cd82
+    (void)argc;
+    (void)argv;
+    init_environment(env, &sys_var);
+    while (1)
+	{
+        init_signals();
+        sys_var.args = readline(PROMPT_MSG);
+        if (!sys_var.args)
+		{
+            ft_clean();
+            ft_putstr_fd("exit\n", STDOUT_FILENO);
+            exit(sys_var.exit_status);
+        }
+        if (sys_var.args[0])
+            add_history(sys_var.args);
+        sys_var.tokens = ft_token();
+        if (sys_var.tokens)
+		{
+            sys_var.node = ft_parsing();
+            if (!sys_var.parsing_error.error_type)
+                ft_exec(&sys_var);
+            else
+                ft_handle_error();
+        }
+    }
+    return (ft_clean(), sys_var.exit_status);
+}
