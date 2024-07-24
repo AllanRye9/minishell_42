@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 11:35:05 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/21 15:48:20 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/21 17:48:14 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	exit_with_code(char **args)
 		ft_putstr_fd("minishell: exit:", STDERR_FILENO);
 		ft_putstr_fd(args[1], STDERR_FILENO);
 		ft_putendl_fd(": -n where n is a numeric", STDERR_FILENO);
-		exit_code = -1;
+		exit_code = 255;
 	}
 	free_arr(args);
 	exit(exit_code);

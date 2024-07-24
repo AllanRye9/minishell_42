@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 21:18:48 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/22 21:18:50 by sbartoul         ###   ########.fr       */
+/*   Created: 2024/07/22 17:08:21 by sbartoul          #+#    #+#             */
+/*   Updated: 2024/07/22 17:11:29 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void pwd_check(char *path)
+int	error_in_export(char *arg)
 {
-    char *str;
-
-    str = getcwd(path, ft_strlen(path));
-    printf("%s\n", str);
+	ft_putstr_fd("minishell: export: ", STDERR_FILENO);
+	if (arg)
+	{
+		ft_putstr_fd(arg, STDERR_FILENO);
+		ft_putstr_fd("\': is ", STDERR_FILENO);
+	}
+	ft_putendl_fd("not a valid identifier", STDERR_FILENO);
+	return (EXIT_FAILURE);
 }

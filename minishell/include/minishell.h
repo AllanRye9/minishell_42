@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/21 15:53:12 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/23 12:07:29 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,11 @@ int		is_digit(char *str);
 void	free_sysvar(t_sysvar *sys_var);
 void	free_doublearr(char **str);
 int		custom_exit(t_sysvar *sys_var, char **args);
+int		error_in_export(char *arg);
+int		invalid_id(char c);
+int		after_eql_sign(char *str);
+char	**add_var(char **env, char *argv);
+int		custom_export(t_sysvar *sys_var, char **argv);
+int		unset(t_sysvar *sys_var, char **args);
 
 #endif

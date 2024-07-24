@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:31:48 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/10 19:05:44 by oallan           ###   ########.fr       */
+/*   Updated: 2024/07/23 15:08:26 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,46 @@
 // }
 
 
+<<<<<<< HEAD
+=======
+int main(int argc, char **argv, char **env) 
+{ 
+	(void)argc;
+	(void)argv;
+	char inputString[MAXWORDS];
+	char *parsedArgs[MAXCMD]; 
+	char* parsedArgsPiped[MAXCMD];
+	int execFlag = 0;
+
+	ExitStatuses *turned;
+
+	turned = (ExitStatuses *)malloc(sizeof(ExitStatuses) * MAXWORDS);
+	if (!turned)
+		free(turned);
+	
+    // infinite loop to take commands
+	while (1) {
+		// print shell line
+		if (signal(SIGINT, sig_handler))
+			ft_putstr_fd("\b", STDERR);
+		else if (signal(SIGQUIT, sig_handler))
+			ft_putstr_fd("\b", STDERR);
+		if (takeInput(inputString))
+			continue;
+		// process 
+		execFlag = processString(inputString, parsedArgs, parsedArgsPiped); 
+		// execflag returns zero if there is no command 
+		// or it is a builtin command, 
+		// 1 if it is a simple command 
+		// 2 if it is including a pipe. 
+
+		// execute 
+		if (execFlag == 1)
+			execArgs(parsedArgs, turned);
+		handleEcho(parsedArgs,turned);
+		if (execFlag == 2) 
+			execArgsPiped(parsedArgs, parsedArgsPiped); 
+	} 
+	return 0; 
+} 
+>>>>>>> 929b7929ab53b07282f6833ade9ddfaaeee3cd82
