@@ -14,6 +14,7 @@
 # define TOKENIZING_H
 
 # include "minishell.h"
+# define PROMPT_MSG "minishell-$ "
 
 typedef enum token_type
 {
@@ -38,4 +39,14 @@ typedef struct token
 	struct token	*prev;
 }	t_token;
 
+//functions here ----->
+t_token					*ft_tokenize(t_minishell *g_shell);
+void					clear_lst(t_token **lst);
+int						is_space(char c);
+void					skip_space(char **l);
+t_token					*create_new_token(char *value, t_token_type type);
+void					token_add_back(t_token **lst, t_token *new);
+int						append_list(t_token_type type, char **l, t_token **t_lst);
+int						handle_separators(char *l, t_token **t_lst);
+t_token					*tokenization_handler(char *line, t_minishell *g_shell);
 #endif

@@ -1,46 +1,45 @@
-#include "minishell.h"
+#include "../include/minishell.h"
 
-int	ft_handle_separator(char **line, t_token **token_list)
+int handle_separators(char *l, t_token **t_lst)
 {
-	if (!ft_strncmp(*line, "<<", 2))
-		return (ft_append_separator(_D_LESS_SIGN, line, token_list) && 1);
-	else if (!ft_strncmp(*line, ">>", 2))
-		return (ft_append_separator(_D_GREAT_SIGN, line, token_list) && 1);
-	else if (!ft_strncmp(*line, "<", 1))
-		return (ft_append_separator(_LESS_SIGN, line, token_list) && 1);
-	else if (!ft_strncmp(*line, ">", 1))
-		return (ft_append_separator(_GREAT_SIGN, line, token_list) && 1);
-	else if (!ft_strncmp(*line, "(", 1))
-		return (ft_append_separator(T_O_PARENT, line, token_list) && 1);
-	else if (!ft_strncmp(*line, ")", 1))
-		return (ft_append_separator(T_C_PARENT, line, token_list) && 1);
-	else if (!ft_strncmp(*line, "&&", 2))
-		return (ft_append_separator(_AND_SIGN, line, token_list) && 1);
-	else if (!ft_strncmp(*line, "||", 2))
-		return (ft_append_separator(_OR_SIGN, line, token_list) && 1);
-	else
-		return (ft_append_separator(T_PIPE, line, token_list) && 1);
+    if (!strncmp(l, "<<", 2))
+        return (append_list(INPUT_DELI, &l, t_lst), 1);
+    else if (!strncmp(l, ">>", 2))
+        return (append_list(OUTPUT_DELI, &l, t_lst), 1);
+    else if (!strncmp(l, "&&", 2))
+        return (append_list(AND, &l, t_lst), 1);
+    else if (!strncmp(l, "||", 2))
+        return (append_list(OR, &l, t_lst), 1);
+    else if (!strncmp(l, "(", 1))
+        return (append_list(O_PARENT, &l, t_lst), 1);
+    else if (!strncmp(l, ")", 1))
+        return (append_list(C_PARENT, &l, t_lst), 1);
+    else if (!strncmp(l, "<", 1))
+        return (append_list(INPUT_R, &l, t_lst), 1);
+    else if (!strncmp(l, ">", 1))
+        return (append_list(OUTPUT_R, &l, t_lst), 1);
+    else
+        return (append_list(PIPE, &l, t_lst), 1);
 }
 
-t_token	*ft_tokenization_handler(char *line)
+t_token *tokenization_handler(char *line, t_minishell *g_shell)
 {
-	int		error;
-	t_token	*token_list;
+    int err;
+    t_token *token_lst;
 
-	error = 0;
-	token_list = NULL;
-	while (*line)
-	{
-		if (error)
-			return (ft_clear_token_list(&token_list), NULL);
-		if (ft_isspace(*line))
-			ft_skip_spaces(&line);
-		else if (!ft_strncmp(line, "<", 1) || !ft_strncmp(line, ">", 1)
-			|| !ft_strncmp(line, "|", 1) || !ft_strncmp(line, "&&", 2)
-			|| !ft_strncmp(line, "(", 1) || !ft_strncmp(line, ")", 1))
-			error = (!ft_handle_separator(&line, &token_list) && 1);
-		else
-			error = (!ft_append_identifier(&line, &token_list) && 1);
-	}
-	return (token_list);
+    err = 0;
+    token_lst = NULL;
+    while (*line) {
+        if (err)
+            return (clear_lst(&token_lst), NULL);
+        if (is_space(*line))
+            skip_space(&line);
+        else if (!strncmp(line, "<", 1) || !strncmp(line, ">", 1) ||
+                 !strncmp(line, "|", 1) || !strncmp(line, "&&", 2) ||
+                 !strncmp(line, "(", 1) || !strncmp(line, ")", 1))
+            err = (!handle_separators(line, &token_lst) && 1);
+        else
+            err = (!append_list(IDENDTIFIER, &line, &token_lst) && 1);
+    }
+    return token_lst;
 }

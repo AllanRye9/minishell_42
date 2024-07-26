@@ -23,6 +23,7 @@
 # include <dirent.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "colors.h"
@@ -32,40 +33,31 @@
 # include "parsing.h"
 # include "tokenizing.h"
 
-# define MAXWORDS 1000 // max number of letters to be supported
-# define MAXCMD 100 // max number of commands to be supported
-# define STDERR 2
-// Clearing the shell using escape sequences 
-# define clear() printf("\033[H\033[J") 
-# define STDERR 2
+int	sig_pipe[2];
 
-// Structure to hold the last two exit statuses
-typedef struct {
-    int lastExitStatus1;
-    int lastExitStatus2;
-} ExitStatuses;
+typedef struct s_minishell
+{
+	char			*line;
+	t_token			*tokens;
+	t_token			*curr_token;
+	int				exit_s;
+	t_parse_err		parse_err;
+	int				stdin;
+	int				stdout;
+	char			**environ;
+	t_node			*ast;
+	t_env			*envlst;
+}					t_minishell;
 
-int             ft_strcmp(char *s, char *s1);
-int             parsePipe(char* str, char** strpiped) ;;
-void            parseSpace(char* str, char** parsed);
-char*           ft_strsep(char **str, char c);
-char*           ft_strchr(const char *str, int c);
-void            execArgs(char** parsed, ExitStatuses* exitStatuses);
-void            handleEcho(char** parsed, ExitStatuses* exitStatuses);
-void            ft_echo(char **args);
-int             processString(char* str, char** parsed, char** parsedpipe);
-int             takeInput(char* str);
-void            execArgsPiped(char** parsed, char** parsedpipe);
-int             CmdHandler(char** parsed);
-int             ft_execvp(const char *file, char *const argv[]);
-size_t          ft_strchar(char *s, char c);
-char            *ft_strcpy(char *d, char *s);
-char            *ft_strtok(char *s, char *delim);
-size_t          ft_strspn(char *start, char *delim);
-size_t          ft_strcspn(char *start, char *delim);
-//signal handling.
-void	sig_handler(int code);
+typedef struct	s_signal_handler
+{
+	bool			heredoc_sgint;
+	bool			signint_child;
+	struct 	termios	original_term;
+	bool			cleanup_needed;
+}	t_signal_handler;
 
+t_signal_handler g_sig_handler;
 
 //Builtins functions
 void	change_path(t_sysvar *sys_var);
