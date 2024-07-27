@@ -37,16 +37,16 @@ int	sig_pipe[2];
 
 typedef struct s_minishell
 {
-	char			*line;
-	t_token			*tokens;
-	t_token			*curr_token;
-	int				exit_s;
-	t_parse_err		parse_err;
-	int				stdin;
-	int				stdout;
-	char			**environ;
-	t_node			*ast;
-	t_env			*envlst;
+	char				*line;
+	t_token				*tokens;
+	t_token				*curr_token;
+	int					exit_s;
+	t_parse_error		parse_error;
+	int					stdin;
+	int					stdout;
+	char				**environ;
+	t_node				*ast;
+	t_env				*envlst;
 }					t_minishell;
 
 typedef struct	s_signal_handler

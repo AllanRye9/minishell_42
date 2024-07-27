@@ -1,35 +1,35 @@
-#include "minishell.h"
+#include "../include/minishell.h"
 
-void	parse_err_type(t_parse_err_type type)
+void	parse_err_type(t_pars_err_type type, t_minishell *err)
 {
-	G_shell_.parse_err.type = type;
+	err->parse_error.error_type = type;
 }
 
-void	handle_parsing_err(void)
+void	handle_parsing_err(t_minishell *G_shell_)
 {
-	t_parse_err_type	type;
+	t_pars_err_type		type;
 	t_token_type		token_type;
 	char				**types;
 
-	types = (char *[]){"_IDENTIFIER",
+	types = (char *[]){"IDENTIFIER",
 		"<", ">", "<<", ">>", "|", "(", ")", "&&", "||", "newline"};
-	type = G_shell_.parse_err.type;
+	type = G_shell_->parse_error.error_type;
 	(void)token_type;
 	(void)types;
 	if (type)
 	{
-		if (type == E_SYNTAX)
+		if (type == SYNTAX_ERROR)
 		{
-			if (!G_shell_.curr_token)
-				token_type = T_NL;
+			if (!G_shell_->curr_token)
+				token_type = NL;
 			else
-				token_type = G_shell_.curr_token->type;
+				token_type = G_shell_->curr_token->token_t;
 			ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
 			ft_putstr_fd(types[token_type], 2);
 			ft_putstr_fd("'\n", 2);
-			G_shell_.exit_s = 258;
+			G_shell_->exit_s = 258;
 		}
-		ft_clear_ast(&G_shell_.ast);
-		ft_bzero(&G_shell_.parse_err, sizeof(t_parse_err));
+		ft_clear_ast(&G_shell_->ast, G_shell_);
+		ft_bzero(&G_shell_->parse_error, sizeof(t_parse_error));
 	}
 }

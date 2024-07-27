@@ -1,38 +1,38 @@
-#include "minishell.h"
+#include "../include/minishell.h"
 
-void	ft_get_next_token(void)
+void	ft_get_next_token(t_minishell *next_ptr)
 {
-	G_shell_.curr_token = G_shell_.curr_token->next;
+	next_ptr->curr_token = next_ptr->curr_token->next;
 }
 
-bool	token_type(void)
+bool	token_type(t_minishell *token)
 {
 	t_token_type	type;
 
-	if (!G_shell_.curr_token)
+	if (!token->curr_token)
 		return (false);
-	type = G_shell_.curr_token->type;
-	if (type == T_PIPE || type == _AND_SIGN || type == _OR_SIGN)
+	type = token->curr_token->token_t;
+	if (type == PIPE || type == AND || type == OR)
 		return (true);
 	return (false);
 }
 
 bool	ft_is_redir(t_token_type type)
 {
-	if (type == _LESS_SIGN || type == _GREAT_SIGN
-		|| type == _D_LESS_SIGN || type == _D_GREAT_SIGN)
+	if (type == INPUT_R || type == OUTPUT_R
+		|| type == INPUT_DELI || type == OUTPUT_DELI)
 		return (true);
 	return (false);
 }
 
 int	ft_prec(t_token_type type)
 {
-	if (type == _OR_SIGN || type == _AND_SIGN)
+	if (type == OR || type == AND)
 		return (0);
 	return (1);
 }
 
-int	ft_curr_token_prec(void)
+int	ft_curr_token_prec(t_minishell *ptr)
 {
-	return (ft_prec(G_shell_.curr_token->type));
+	return (ft_prec(ptr->curr_token->token_t));
 }
