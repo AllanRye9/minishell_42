@@ -25,21 +25,21 @@ int handle_separators(char *l, t_token **token)
 t_token *tokenization_handler(char *line, t_minishell *g_shell)
 {
     int err;
-    t_token *token_lst;
+    t_token *token;
 
     err = 0;
-    token_lst = NULL;
+    token = NULL;
     while (*line) {
         if (err)
-            return (clear_lst(&token_lst), NULL);
+            return (clear_lst(&token), NULL);
         if (is_space(*line))
             skip_space(&line);
         else if (!strncmp(line, "<", 1) || !strncmp(line, ">", 1) ||
                  !strncmp(line, "|", 1) || !strncmp(line, "&&", 2) ||
                  !strncmp(line, "(", 1) || !strncmp(line, ")", 1))
-            err = (!handle_separators(line, &token_lst) && 1);
+            err = (!handle_separators(line, &token) && 1);
         else
-            err = (!append_list(IDENDTIFIER, &line, &token_lst) && 1);
+            err = (!append_list(IDENDTIFIER, &line, &token) && 1);
     }
-    return token_lst;
+    return token;
 }
