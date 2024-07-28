@@ -1,25 +1,25 @@
 #include "../include/minishell.h"
 
-int handle_separators(char *l, t_token **t_lst)
+int handle_separators(char *l, t_token **token)
 {
     if (!strncmp(l, "<<", 2))
-        return (append_list(INPUT_DELI, &l, t_lst), 1);
+        return (append_list(INPUT_DELI, &l, token), 1);
     else if (!strncmp(l, ">>", 2))
-        return (append_list(OUTPUT_DELI, &l, t_lst), 1);
+        return (append_list(OUTPUT_DELI, &l, token), 1);
     else if (!strncmp(l, "&&", 2))
-        return (append_list(AND, &l, t_lst), 1);
+        return (append_list(AND, &l, token), 1);
     else if (!strncmp(l, "||", 2))
-        return (append_list(OR, &l, t_lst), 1);
+        return (append_list(OR, &l, token), 1);
     else if (!strncmp(l, "(", 1))
-        return (append_list(O_PARENT, &l, t_lst), 1);
+        return (append_list(O_PARENT, &l, token), 1);
     else if (!strncmp(l, ")", 1))
-        return (append_list(C_PARENT, &l, t_lst), 1);
+        return (append_list(C_PARENT, &l, token), 1);
     else if (!strncmp(l, "<", 1))
-        return (append_list(INPUT_R, &l, t_lst), 1);
+        return (append_list(INPUT_R, &l, token), 1);
     else if (!strncmp(l, ">", 1))
-        return (append_list(OUTPUT_R, &l, t_lst), 1);
+        return (append_list(OUTPUT_R, &l, token), 1);
     else
-        return (append_list(PIPE, &l, t_lst), 1);
+        return (append_list(PIPE, &l, token), 1);
 }
 
 t_token *tokenization_handler(char *line, t_minishell *g_shell)
