@@ -66,15 +66,15 @@ void			init_signals(void);
 void			sigquit_handler(int code);
 void			change_path(t_sysvar *sys_var);
 void			add_path_to_env(t_sysvar *sys_var);
-int				change_dir(t_sysvar *sysvar, char *path);
-int				env(t_sysvar *sys_var);
-int				is_digit(char *str);
-int				custom_exit(t_sysvar *sys_var, char **args);
-int				error_in_export(char *arg);
-int				invalid_id(char c);
-int				after_eql_sign(char *str);
+int			change_dir(t_sysvar *sysvar, char *path);
+int			env(t_sysvar *sys_var);
+int			is_digit(char *str);
+int			custom_exit(t_sysvar *sys_var, char **args);
+int			error_in_export(char *arg);
+int			invalid_id(char c);
+int			after_eql_sign(char *str);
 char			**add_var(char **env, char *argv);
-int				custom_export(t_sysvar *sys_var, char **argv);
-int				unset(t_sysvar *sys_var, char **args);
+int			custom_export(t_sysvar *sys_var, char **argv);
+int			unset(t_sysvar *sys_var, char **args);
 
 #endif
