@@ -22,7 +22,7 @@ typedef enum	parsing_error_type
 
 typedef struct	parsing_err
 {
-	t_pars_err_type	error_type;
+	t_pars_err_type		error_type;
 	char			*str;
 }	t_parse_error;
 
@@ -64,11 +64,11 @@ typedef struct node
 {
 	t_node_type		node_type;
 	t_io_type		*io_type;
-	t_io_node       *io_list;
+	t_io_node       	*io_list;
 	char			*arg;
 	char			*expanded_args;
-	struct s_node	*prev;
-	struct s_node	*next;
+	struct s_node		*prev;
+	struct s_node		*next;
 }	t_node;
 
 typedef struct sys_variable
@@ -77,11 +77,11 @@ typedef struct sys_variable
 	t_token				*tokens;
 	t_token				*current_token;
 	t_node				*node;
-	int					exit_status;
-	int					sigint_child;
-	t_parse_error		parsing_error;
-	int					stdin;
-	int					stdout;
+	int				exit_status;
+	int				sigint_child;
+	t_parse_error			parsing_error;
+	int				stdin;
+	int				stdout;
 	char				**env;
 	char				**path;
 	t_env				*env;
@@ -90,8 +90,8 @@ typedef struct sys_variable
 	bool				heredoc_sigint;
 }	t_sysvar;
 
-int						ft_prec(t_token_type type);
-int						ft_curr_token_prec(t_minishell *ptr);
+int					ft_prec(t_token_type type);
+int					ft_curr_token_prec(t_minishell *ptr);
 t_node					*ft_term(t_minishell *passed);
 t_node					*ft_get_cmd(t_minishell *cmds);
 t_node					*ft_expression(int min_prec, t_minishell *passed);

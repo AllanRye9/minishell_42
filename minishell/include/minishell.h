@@ -33,17 +33,17 @@
 # include "parsing.h"
 # include "tokenizing.h"
 
-int	sig_pipe[2];
+int		sig_pipe[2];
 
 typedef struct s_minishell
 {
 	char				*line;
 	t_token				*tokens;
 	t_token				*curr_token;
-	int					exit_s;
-	t_parse_error		parse_error;
-	int					stdin;
-	int					stdout;
+	int				exit_s;
+	t_parse_error			parse_error;
+	int				stdin;
+	int				stdout;
 	char				**environ;
 	t_node				*ast;
 	t_env				*envlst;
@@ -51,10 +51,10 @@ typedef struct s_minishell
 
 typedef struct	s_signal_handler
 {
-	bool				heredoc_sgint;
-	bool				signint_child;
-	struct 	termios		original_term;
-	bool				cleanup_needed;
+	bool			heredoc_sgint;
+	bool			signint_child;
+	struct 	termios	original_term;
+	bool			cleanup_needed;
 }	t_signal_handler;
 
 t_signal_handler g_sig_handler;
