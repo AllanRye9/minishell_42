@@ -90,8 +90,8 @@ typedef struct sys_variable
 	bool				heredoc_sigint;
 }	t_sysvar;
 
-int						ft_prec(t_token_type type);
-int						ft_curr_token_prec(t_minishell *ptr);
+int					ft_prec(t_token_type type);
+int					ft_curr_token_prec(t_minishell *ptr);
 t_node					*ft_term(t_minishell *passed);
 t_node					*ft_get_cmd(t_minishell *cmds);
 t_node					*ft_expression(int min_prec, t_minishell *passed);
