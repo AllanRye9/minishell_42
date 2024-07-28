@@ -28,8 +28,8 @@ t_node	*ft_expression(int min_prec, t_minishell *passed)
 {
 	t_node			*left;
 	t_node			*right;
-	int				n_prec;
-	t_token_type	op;
+	int			n_prec;
+	t_token_type		op;
 
 	if (passed->parse_error.error_type || !passed->curr_token)
 		return (NULL);
