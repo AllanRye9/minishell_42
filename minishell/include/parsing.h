@@ -51,12 +51,12 @@ typedef enum	io_types
 
 typedef struct s_io_node
 {
-    t_io_type        type;
-    char            *value;
-    char            **expanded_value;
-    int             here_doc;
-    struct s_io_node *prev;
-    struct s_io_node *next;
+    t_io_type        	type;
+    char            	*value;
+    char            	**expanded_value;
+    int             	here_doc;
+    struct s_io_node 	*prev;
+    struct s_io_node 	*next;
 }   t_io_node;
 //Added the t_io_node -------->
 

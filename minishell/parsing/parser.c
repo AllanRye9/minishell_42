@@ -28,8 +28,8 @@ t_node	*ft_expression(int min_prec, t_minishell *passed)
 {
 	t_node			*left;
 	t_node			*right;
-	int				n_prec;
-	t_token_type	op;
+	int				i;
+	t_token_type	form;
 
 	if (passed->parse_error.error_type || !passed->curr_token)
 		return (NULL);
@@ -38,15 +38,15 @@ t_node	*ft_expression(int min_prec, t_minishell *passed)
 		return (NULL);
 	while (token_type(passed) && ft_curr_token_prec(passed) >= min_prec)
 	{
-		op = passed->curr_token->token_t;
+		form = passed->curr_token->token_t;
 		ft_get_next_token(passed);
 		if (!passed->curr_token)
 			return (parse_err_type(SYNTAX_ERROR, passed), left);
-		n_prec = ft_prec(op) + 1;
-		right = ft_expression(n_prec, passed);
+		i = ft_prec(form) + 1;
+		right = ft_expression(i, passed);
 		if (!right)
 			return (left);
-		left = ft_merge(op, left, right);
+		left = ft_merge(form, left, right, passed);
 		if (!left)
 			return (ft_clear_ast(&left, passed), ft_clear_ast(&right, passed), NULL);
 	}

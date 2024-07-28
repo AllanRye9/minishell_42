@@ -1,38 +1,39 @@
-#include "minishell.h"
+#include "../include/minishell.h"
 
-static void	sig_handler(int code)
+static void sigint_handler(int code)
 {
 	(void)code;
-	if(G_shell_.signint_child)
+	if(g_sig_handler.signint_child)
 	{
 		ft_putstr_fd("\n", 1);
-		G_shell_.signint_child = false;
-		G_shell_.heredoc_sigint = true;
+		g_sig_handler.signint_child = false;
+		g_sig_handler.heredoc_sgint = true;
 	}
 	else
 	{
-		ft_putchar_fd("\n", 1);
+		ft_putstr_fd("\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
 }
 
-void ft_sigquit_handler(int code)
+void sigquit_handler(int code)
 {
 	(void)code;
-	ft_putchar_fd("Quit: 3\n", 1);
+	ft_putstr_fd("Quit: 3\n", 1);
 }
 
-void signal_init_(void)
+void init_signals(void)
 {
-	struct termios t;
+	struct termios		term;
 
-	t = G_shell_.orignal_terminal;
-	t.c_lflag &= ~ECHOCTL;
-	tcsetattr(STDIN_FILENO, TCSANOW, &t);
-	G_shell_.heredoc_sigint = false;
-	G_shell_.signint_child = false;
-	signal(SIGINT, sig_handler);
+	term = g_sig_handler.original_term;
+	term.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	g_sig_handler.cleanup_needed = false;
+	g_sig_handler.heredoc_sgint = false;
+	g_sig_handler.signint_child = false;
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sigint_handler);
 }
