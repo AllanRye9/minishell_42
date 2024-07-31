@@ -14,39 +14,39 @@
 # define TOKENIZING_H
 
 # include "minishell.h"
-# define PROMPT_MSG "minishell-$ "
 
-typedef enum token_type
+typedef enum e_token_type
 {
-	IDENDTIFIER,
-	INPUT_R,
-	OUTPUT_R,
-	INPUT_DELI,
-	OUTPUT_DELI,
-	PIPE,
-	O_PARENT,
-	C_PARENT,
-	AND,
-	OR,
-	NL
+	T_IDENTIFIER,
+	T_LESS,
+	T_GREAT,
+	T_DLESS,
+	T_DGREAT,
+	T_PIPE,
+	T_O_PARENT,
+	T_C_PARENT,
+	T_AND,
+	T_OR,
+	T_NL,
 }	t_token_type;
 
-typedef struct token
+typedef struct s_token
 {
-	t_token_type		token_t;
+	t_token_type		type;
 	char				*value;
-	struct token		*next;
-	struct token		*prev;
+	struct s_token		*next;
+	struct s_token		*prev;
 }	t_token;
 
+
 //functions here ----->
-t_token				*ft_tokenize(t_minishell *g_shell);
-void				clear_lst(t_token **lst);
-int					is_space(char c);
-void				skip_space(char **l);
-t_token				*create_new_token(char *value, t_token_type type);
-void				token_add_back(t_token **lst, t_token *new);
-int					append_list(t_token_type type, char **l, t_token **t_lst);
-int					handle_separators(char *l, t_token **t_lst);
-t_token				*tokenization_handler(char *line, t_minishell *g_shell);
+bool			ft_skip_quotes(char *line, size_t *l);
+void			ft_print_quotes_err(char c, t_minishell *g);
+void			ft_skip_spaces(char **line);
+int				ft_is_space(char c);
+int				ft_is_separator(char *s);
+int				ft_is_quote(char c);
+int				ft_append_identifiers(char **line, t_token **token_list, t_minishell *g);
+t_token			*ft_token_handler(char *line, t_minishell *g);
+t_token			*ft_tokenize(t_minishell *g);
 #endif

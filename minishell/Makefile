@@ -40,14 +40,15 @@ UTILS	:=	utils/ft_asterisker.c \
 
 PARSING		:=	parsing/clear.c \
 				parsing/err.c \
-				parsing/helpers.c \
+				parsing/expression.c \
+				parsing/grammar.c \
 				parsing/nodes.c \
 				parsing/utils.c \
 				parsing/parser.c
 
 TOKENIZATION	:=	tokenization/appenders.c \
 					tokenization/handlers.c \
-					tokenization/tokenize_lists.c \
+					tokenization/clear.c \
 					tokenization/utils.c \
 					tokenization/tokenizer.c
 

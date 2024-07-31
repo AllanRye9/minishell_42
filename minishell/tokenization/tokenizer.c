@@ -1,13 +1,13 @@
 #include "../include/minishell.h"
 
-t_token *ft_tokenize(t_minishell *g_shell)
+t_token *ft_tokenize(t_minishell *g)
 {
-    char *line;
+    char    *line;
     t_token *token_list;
-
-    line = g_shell->line;
-    token_list = tokenization_handler(line, g_shell);
+    
+    line = g->line;
+    token_list = ft_token_handler(line, g);
     free(line);
-    g_shell->line = NULL;
-    return token_list;
+    g->line = NULL;
+    return (token_list);
 }
