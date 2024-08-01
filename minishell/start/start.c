@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:31:48 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/31 15:43:09 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/01 15:24:26 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int main(int argc, char **argv, char **env)
         if (g_shell.tokens)
 		{
             g_shell.ast = ft_parse(&g_shell);
-            if (!g_shell.parse_error.error_type)
+            if (!g_shell.parse_err.type)
                 ft_exec(&g_shell);
             else
                 ft_handle_parse_err(&g_shell);
