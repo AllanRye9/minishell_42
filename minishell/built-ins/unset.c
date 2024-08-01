@@ -6,26 +6,26 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:28:39 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/23 12:05:59 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/01 13:21:45 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	**del_loop(char **env, char **ret_strings, char *argv)
+char	**del_loop(char **environ, char **ret_strings, char *argv)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (env[i] != NULL)
+	while (environ[i] != NULL)
 	{
-		if (!(ft_strncmp(env[i], argv, after_eql_sign(env[i]) - 1) == 0
-				&& argv[after_eql_sign(env[i])] == '\0'
-				&& env[i][ft_strlen(argv)] == '='))
+		if (!(ft_strncmp(environ[i], argv, after_eql_sign(environ[i]) - 1) == 0
+				&& argv[after_eql_sign(environ[i])] == '\0'
+				&& environ[i][ft_strlen(argv)] == '='))
 		{
-			ret_strings = ft_strdup(env[i]);
+			ret_strings = ft_strdup(environ[i]);
 			if (ret_strings[j] == NULL)
 			{
 				free_doublearr(ret_strings);
@@ -38,18 +38,18 @@ char	**del_loop(char **env, char **ret_strings, char *argv)
 	return (ret_strings);
 }
 
-char	**del_var(char **env, char *argv)
+char	**del_var(char **environ, char *argv)
 {
 	char	**ret_strings;
 	int		i;
 
 	i = 0;
-	while (env[i] != NULL)
+	while (environ[i] != NULL)
 		i++;
 	ret_strings = ft_calloc(sizeof(char *), i + 1);
 	if (!ret_strings)
 		return (NULL);
-	ret_strings = del_loop(env, ret_strings, argv);
+	ret_strings = del_loop(environ, ret_strings, argv);
 }
 
 int	error_in_unset(char **args)
@@ -80,7 +80,7 @@ int	error_in_unset(char **args)
 	return (EXIT_SUCCESS);
 }
 
-int	unset(t_sysvar *sys_var, char **args)
+int	unset(t_minishell *g_shell, char **args)
 {
 	char	**tmp;
 
@@ -88,9 +88,9 @@ int	unset(t_sysvar *sys_var, char **args)
 		return (EXIT_FAILURE);
 	else
 	{
-		tmp = del_var(sys_var->env, args[1]);
-		free_doublearr(sys_var->env);
-		sys_var->env = tmp;
+		tmp = del_var(g_shell->environ, args[1]);
+		free_doublearr(g_shell->environ);
+		g_shell->environ = tmp;
 	}
 	return (EXIT_SUCCESS);
 }

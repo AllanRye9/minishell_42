@@ -6,82 +6,78 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 17:42:55 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/22 19:44:59 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/01 13:24:49 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	equalsign_exist(char *arg)
+int	ft_isalpha(char *str)
 {
 	int	i;
 
-	i = -1;
-	while (arg[++i])
-		if (arg[i] == '=')
-			return (i + 1);
-	return (0);
-}
-
-int	valid_param(char *arg)
-{
-	int	i;
-
-	i = -1;
-	if (ft_isdigit(arg[0]) || arg[0] == '=' || !equalsign_exist(arg))
-		return (error_in_export(arg));
-	while (arg[++i] != '=')
-		if (invalid_id(arg[i]))
-			return (error_in_export(arg));
-	return (EXIT_SUCCESS);
-}
-
-int	variable_exist(t_sysvar *sys_var, char *argv)
-{
-	int	i;
-
-	i = 0;
-	while (argv[after_eql_sign(argv)] == '\"' && i < 2)
+	i = 1;
+	if (!ft_isalnum(*str) && *str != '-')
+		return (0);
+	while(str[i] && str[i] != '=')
 	{
-		delete_quotes(argv, '\"');
+		if (!ft_isalpha(str[i]) && str[i] != '_')
+			return (0);
 		i++;
 	}
-	i = -1;
-	while (sys_var->env[++i])
-	{
-		if (ft_strncmp(sys_var->env[i], argv, after_eql_sign(sys_var->env[i])) == 0)
-		{
-			free(sys_var->env[i]);
-			sys_var->env[i] = ft_strdup(argv);
-			return (1);
-		}
-	}
-	return (0);
+	return (1);
 }
 
-int	custom_export(t_sysvar *sys_var, char **argv)
+static void	print_exportlst(t_minishell *g_shell)
 {
-	char	**tmp;
+	t_env	*envlst;
+	size_t	i;
+
+	envlst = g_shell->envlst;
+	while (envlst)
+	{
+		if (envlst->value != NULL && (ft_strcmp(envlst->key, "_") != 0))
+		{
+			printf("declare -x %s=\"", envlst->key);
+			i = 0;
+			while (envlst->value[i])
+			{
+				if ((envlst->value)[i] == '$' || (envlst->value)[i] == '"')
+					print("\\%c", (envlst->value)[i++]);
+				else
+					print("%c", (envlst->value)[i++]);
+			}
+			printf("\"\n");
+		}
+		else if (envlst->value = NULL && (ft_strcmp(envlst->key, "_") != 0))
+			printf("declare -x %s\n", envlst->key);
+		envlst = envlst->next;
+	}
+}
+
+int	ft_export(t_minishell *g_shell, char **argv)
+{
+	char	*key;
+	int		exit_status;
 	int		i;
 
 	i = 1;
-	if (!argv[1] || argv[1][0] == '\0')
-		env(sys_var);
-	else
+	exit_status = 0;
+	if (!argv[i])
+		return (print_exportlst(g_shell), 0);
+	while (argv[i])
 	{
-		while (argv[i])
+		if (ft_isalpha(argv[i]) == 0)
+			exit_status = error_in_export(argv[i]);
+		else
 		{
-			if (valid_param(argv[i]) && variable_exist(sys_var, argv[i]))
-			{
-				if (argv[i])
-				{
-					tmp = add_var(sys_var->env, argv[i]);
-					free_doublearr(sys_var->env);
-					sys_var->env = tmp;
-				}
-			}
-			i++;
+			key = ft_extract_key(argv[i]);
+			if (ft_env_entry_exist(key, g_shell))
+				ft_update_envlst(key, ft_extract_value(argv[i]), false, g_shell);
+			else
+				ft_update_envlst(key, ft_extract_value(argv[i]), true, g_shell);
 		}
+		i++;
 	}
-	return (EXIT_SUCCESS);
+	return (exit_status);
 }

@@ -6,62 +6,43 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:13:24 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/20 15:13:27 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/31 16:20:18 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*find_path(t_sysvar *sysvar, char *path)
+static int	return_homedir(t_minishell *g_shell)
 {
-	int	i;
+	char	*home;
 
-	while (sysvar->env[i])
-	{
-		if (!ft_strncmp(sysvar->env[i], path, ft_strlen(path)))
-			return (ft_substr(sysvar->env[i], ft_strlen(path), ft_strlen(sysvar->env[i]) - ft_strlen(path)));
-		i++;
-	}
-	return (NULL);
-}
- 
-int	change_to(t_sysvar *sys_var, char *path)
-{
-	char	*dir;
-	int		ret_value;
-
-	dir = find_path(sys_var, path);
-	ret_value = chdir(dir);
-	free(dir);
-	if (ret_value == -1)
-	{
-		path = ft_substr(path, 0, ft_strlen(path) - 1);
-		ft_putstr_fd(path, STDERR_FILENO);
-		free(path);
-	}
-	return (ret_value);
+	ft_update_envlst("OLDPWD", ft_get_envlst_val("PWD", g_shell), false, g_shell);
+	home = ft_get_envlst_val("HOME", g_shell);
+	if (!home)
+		return (ft_putstr_fd("minishell: cd: Home not set\n", 2), 1);
+	if (chdir(home) == 0)
+		return (ft_update_envlst("PWD", home, false, g_shell), 0);
+	return (1);
 }
 
-int	change_dir(t_sysvar *sysvar, char *path)
+static int	ft_chdir(t_minishell *g_shell)
+{
+	char	*current_dir;
+
+	current_dir = getcwd(NULL, 0);
+	if (!current_dir)
+		return (1);
+	return (ft_update_envlst("PWD", current_dir, false, g_shell), 0);
+}
+
+int	ft_cd(t_minishell *g_shell, char *path)
 {
 	int	ret_val;
 
 	if (!path)
-		ret_val = change_to(sysvar, "HOME=");
-	else if (ft_strncmp(path, "-", 1) == 0)
-		ret_val = change_to(sysvar, "OLDPWD=");
-	else
-	{
-		ret_val = chdir(path);
-		if (ret_val == -1)
-		{
-			ft_putstr_fd("Error:", STDERR_FILENO);
-			ft_putstr_fd(path, STDERR_FILENO);
-		}
-	}
-	if (ret_val == -1)
-		return (EXIT_FAILURE);
-	change_path(sysvar);
-	add_path_to_env(sysvar);
-	return (EXIT_SUCCESS);
+		return (return_homedir(g_shell));
+	if (chdir(path) == -1)
+		return (ft_cd_err(path));
+	ft_update_envlst("OLDPWD", ft_get_envlst_val("PWD", g_shell), false, g_shell);
+	return (ft_chdir(g_shell));
 }

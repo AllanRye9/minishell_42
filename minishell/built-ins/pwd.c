@@ -6,16 +6,20 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:18:48 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/22 21:18:50 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/01 13:16:27 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void pwd_check(char *path)
+int	ft_pwd(void)
 {
-    char *str;
+	char	*cwd;
 
-    str = getcwd(path, ft_strlen(path));
-    printf("%s\n", str);
+	cwd = NULL;
+	cwd = getcwd(cwd, 0);
+	if (!cwd)
+		return (1);
+	ft_putendl_fd(cwd, STDOUT_FILENO);
+	return (0);
 }

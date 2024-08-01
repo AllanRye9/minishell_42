@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:31:48 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/31 15:20:04 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/31 15:43:09 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	init_environment(char **env, t_minishell *g_shell)
 static void	ft_exec(t_minishell *g_shell)
 {
 	signal(SIGQUIT, sigquit_handler);
-	ft_init_tree(g_shell->ast, g_shell);
+	init_asttree(g_shell->ast, g_shell);
 	if (g_sig_handler.heredoc_sgint)
 	{
 		ft_clear_ast(&g_shell->ast, g_shell);
@@ -60,7 +60,7 @@ int main(int argc, char **argv, char **env)
 		{
             g_shell.ast = ft_parse(&g_shell);
             if (!g_shell.parse_error.error_type)
-                ft_start_execution(&g_shell);
+                ft_exec(&g_shell);
             else
                 ft_handle_parse_err(&g_shell);
         }

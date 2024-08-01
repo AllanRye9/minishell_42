@@ -6,20 +6,16 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 17:08:21 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/22 17:11:29 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/01 13:24:44 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	error_in_export(char *arg)
+int	error_in_export(char *identifier)
 {
-	ft_putstr_fd("minishell: export: ", STDERR_FILENO);
-	if (arg)
-	{
-		ft_putstr_fd(arg, STDERR_FILENO);
-		ft_putstr_fd("\': is ", STDERR_FILENO);
-	}
-	ft_putendl_fd("not a valid identifier", STDERR_FILENO);
-	return (EXIT_FAILURE);
+	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
+	ft_putstr_fd(identifier, STDERR_FILENO);
+	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+	return (1);
 }

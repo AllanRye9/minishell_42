@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readline.c                                         :+:      :+:    :+:   */
+/*   init_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 02:53:00 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/05 02:53:32 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/31 16:03:07 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+#include "../include/minishell.h"
 
-int	main(void)
+void	init_asttree(t_node *node, t_minishell *g_shell)
 {
-	char	*input;
-
-	input = readline("Enter something: ");
-	if (input && *input)
-	{
-		add_history(input);
-	}
-	printf("You entered: %s\n", input);
-	free(input);
+	if (!node)
+		return ;
 }
