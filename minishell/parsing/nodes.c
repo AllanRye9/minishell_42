@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   nodes.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oallan <oallan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/31 15:56:41 by oallan            #+#    #+#             */
+/*   Updated: 2024/07/31 17:07:50 by oallan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 t_io_type   ft_get_io_type(t_token_type t)
 {
-    if(t == T_LESS)
+    if(t == T_R_INPUT)
         return (IO_IN);
-    if(t == T_GREAT)
+    if(t == T_R_OUT)
         return (IO_OUT);
-    if(t == T_DLESS)
+    if(t == T_HEREDOC)
         return (IO_HEREDOC);
     return (IO_APPEND);
 }
@@ -62,7 +74,7 @@ bool    ft_get_io_list(t_io_node **io_list, t_minishell *g)
         ft_get_next_token(g);
         if(!g->curr_token)
             return (ft_set_parse_err(E_SYNTAX, g), false);
-        if (g->curr_token->type != T_IDENTIFIER)
+        if (g->curr_token->type != IDENTIFIER)
             return (ft_set_parse_err(E_SYNTAX, g), false);
         tem = ft_new_io_node(redir_t, g->curr_token->value);
         if(!tem)

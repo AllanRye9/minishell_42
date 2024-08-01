@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   err.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oallan <oallan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/31 15:56:31 by oallan            #+#    #+#             */
+/*   Updated: 2024/07/31 17:03:41 by oallan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 void	ft_set_parse_err(t_parse_err_type type, t_minishell *g_minishell)
@@ -11,7 +23,7 @@ void	ft_handle_parse_err(t_minishell *g_minishell)
 	t_token_type		token_type;
 	char				**types;
 
-	types = (char *[]){"T_IDENTIFIER",
+	types = (char *[]){"IDENTIFIER",
 		"<", ">", "<<", ">>", "|", "(", ")", "&&", "||", "newline"};
 	type = g_minishell->parse_err.type;
 	(void)token_type;

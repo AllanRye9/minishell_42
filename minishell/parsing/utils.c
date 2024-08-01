@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oallan <oallan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/31 15:56:48 by oallan            #+#    #+#             */
+/*   Updated: 2024/07/31 17:07:50 by oallan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 void ft_get_next_token(t_minishell *g)
@@ -7,8 +19,8 @@ void ft_get_next_token(t_minishell *g)
 
 bool ft_is_redir(t_token_type t)
 {
-    if(t == T_LESS || t == T_GREAT || t == T_DLESS 
-        || t == T_DGREAT)
+    if(t == T_R_INPUT || t == T_R_OUT || t == T_HEREDOC 
+        || t == T_APPEND)
         return (true);
     return (false);
 }
@@ -23,7 +35,7 @@ bool    ft_join_args(char **args, t_minishell *g)
         *args = ft_strdup("");
     if(!*args)
         return (false);
-    while(g->curr_token && g->curr_token->type == T_IDENTIFIER)
+    while(g->curr_token && g->curr_token->type == IDENTIFIER)
     {
         to_free = *args;
         *args = ft_strjoin_with(*args, g->curr_token->value, ' ');

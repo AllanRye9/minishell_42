@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handlers.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/31 15:55:59 by oallan            #+#    #+#             */
+/*   Updated: 2024/07/31 13:18:20 by codespace        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 int ft_identify_separators(char **line, char **token_list)
 {
     if (!ft_strncmp(*line, "<<", 2))
-		return (ft_append_separators(T_DLESS, line, token_list) && 1);
+		return (ft_append_separators(T_HEREDOC, line, token_list) && 1);
 	else if (!ft_strncmp(*line, ">>", 2))
-		return (ft_append_separators(T_DGREAT, line, token_list) && 1);
+		return (ft_append_separators(T_APPEND, line, token_list) && 1);
 	else if (!ft_strncmp(*line, "<", 1))
-		return (ft_append_separators(T_LESS, line, token_list) && 1);
+		return (ft_append_separators(T_R_INPUT, line, token_list) && 1);
 	else if (!ft_strncmp(*line, ">", 1))
-		return (ft_append_separators(T_GREAT, line, token_list) && 1);
+		return (ft_append_separators(T_R_OUT, line, token_list) && 1);
 	else if (!ft_strncmp(*line, "(", 1))
 		return (ft_append_separators(T_O_PARENT, line, token_list) && 1);
 	else if (!ft_strncmp(*line, ")", 1))
@@ -24,8 +36,8 @@ int ft_identify_separators(char **line, char **token_list)
 
 t_token *ft_token_handler(char *line, t_minishell *g)
 {
-    int error;
-    t_token *token_list;
+    int			error;
+    t_token 	*token_list;
     
     error = 0;
     token_list = NULL;

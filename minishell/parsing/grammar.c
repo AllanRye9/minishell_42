@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   grammar.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oallan <oallan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/31 15:56:38 by oallan            #+#    #+#             */
+/*   Updated: 2024/07/31 17:03:41 by oallan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 t_node *ft_get_cmds(t_minishell *g)
@@ -9,10 +21,10 @@ t_node *ft_get_cmds(t_minishell *g)
     node = creat_new_token(N_CMD);
     if(!node)
         return (ft_set_parse_err(E_MEM, g), NULL);
-    while(g->curr_token && (g->curr_token->type == T_IDENTIFIER
+    while(g->curr_token && (g->curr_token->type == IDENTIFIER
     || ft_is_redir(g->curr_token->type)))
     {
-        if(g->curr_token->type == T_IDENTIFIER)
+        if(g->curr_token->type == IDENTIFIER)
         {
             if(!ft_join_args(&(node->args), g))
                 return (ft_clear_cmd_node(node), ft_set_parse_err(E_MEM, g), NULL);

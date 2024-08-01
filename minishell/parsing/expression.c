@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expression.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oallan <oallan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/31 15:56:34 by oallan            #+#    #+#             */
+/*   Updated: 2024/07/31 16:38:00 by oallan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 t_node *ft_combine(t_token_type id, t_node* left, t_node *right, t_minishell *g)
@@ -19,24 +31,24 @@ t_node *ft_expression(int i, t_minishell *g)
    t_node           *left;
    t_node           *right;
    int              j;
-   t_token_type     id;
+   t_token_type     sep;
    
     if (g->parse_err.type || !g->curr_token)
-        return NULL;
+        return (NULL);
     left = ft_define_grammar(g);
     if(!left)
         return (NULL);
     while(ft_is_token_sep(g) && ft_token_prec(g) >= i)
     {
-        id = g->curr_token->type;
+        sep = g->curr_token->type;
         ft_get_next_token(g);
         if(!g->curr_token)
             return(ft_set_parse_err(E_SYNTAX, g), left);
-        j = ft_prec(id) + 1;
+        j = ft_prec(sep) + 1;
         right = ft_expression(j, g);
         if(!right)
             return(left);
-        left = ft_combine(id, left, right, g);
+        left = ft_combine(sep, left, right, g);
         if(!left)
             return (ft_clear_astree(&left, g), ft_clear_astree(&right, g), NULL);
     }

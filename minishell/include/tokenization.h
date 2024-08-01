@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizing.h                                       :+:      :+:    :+:   */
+/*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: oallan <oallan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:42:11 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/18 17:58:01 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/31 17:07:50 by oallan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 
 typedef enum e_token_type
 {
-	T_IDENTIFIER,
-	T_LESS,
-	T_GREAT,
-	T_DLESS,
-	T_DGREAT,
+	IDENTIFIER,
+	T_R_INPUT,
+	T_R_OUT,
+	T_HEREDOC,
+	T_APPEND,
 	T_PIPE,
 	T_O_PARENT,
 	T_C_PARENT,

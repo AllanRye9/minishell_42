@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oallan <oallan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/31 16:05:10 by oallan            #+#    #+#             */
+/*   Updated: 2024/07/31 16:10:00 by oallan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
@@ -16,7 +27,7 @@ static int	ft_matchset(char c, char const *set)
 }
 
 static char	*ft_trimmer(char const *s1, char const *set)
-{	
+{
 	size_t	i;
 	size_t	j;
 	char	*trimmed;
