@@ -6,11 +6,11 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 15:39:23 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/01 15:47:58 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:28:50 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 static void	heredoc_sigint(int sig)
 {
@@ -33,7 +33,7 @@ void	ft_heredoc(t_io_node *io, int fd[2], t_minishell *g_shell)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || ft_is_delim(io->value, line))
+		if (!line || is_delim(io->value, line))
 			break ;
 		if (!quote)
 			ft_heredoc_expander(line, fd[1], g_shell);

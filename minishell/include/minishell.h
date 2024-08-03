@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/31 15:50:46 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:25:55 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,4 +126,8 @@ void			ft_clean(t_minishell *G_shell_);
 //signal functions
 void			init_signals(void);
 void			sigquit_handler(int code);
+
+//execution part
+void	init_asttree(t_node *node, t_minishell *g_shell);
+void	ft_heredoc(t_io_node *io, int fd[2], t_minishell *g_shell);
 #endif

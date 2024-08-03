@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:31:48 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/01 15:24:26 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/01 22:19:02 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	ft_exec(t_minishell *g_shell)
 int main(int argc, char **argv, char **env)
 {
     t_minishell g_shell;
+	t_list		tmp_lst;
 
     (void)argc;
     (void)argv;
