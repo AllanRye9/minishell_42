@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/01 17:25:55 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/04 01:34:03 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,4 +130,21 @@ void			sigquit_handler(int code);
 //execution part
 void	init_asttree(t_node *node, t_minishell *g_shell);
 void	ft_heredoc(t_io_node *io, int fd[2], t_minishell *g_shell);
+
+//expander exec
+char	**split_doublearr(char const *args);
+char	**ft_expand(char *args, t_minishell *g_shell);
+void	ft_heredoc_expander(char *args, int fd, t_minishell *g_shell);
+char	*handle_empty_quotes(char *args);
+void	free_doublearr(char **arr);
+void	free_tripearr(char ***arr);
+char	**ft_join_str_arrs(char ***arr);
+bool	ft_is_valid_char(char c);
+char	*ft_get_envlst_val(char *key, t_minishell *g_shell);
+char	*ft_handle_dquotes(char *args, size_t *i, t_minishell *g_shell);
+char	*ft_handle_squotes(char *args, size_t *i);
+char	*ft_handle_arg(char *args, size_t *i);
+char	*ft_rm_quotes(char *arg);
+bool	ft_match_star(char *pattern, char *args);
+
 #endif
