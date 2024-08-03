@@ -14,6 +14,7 @@
 # define PARSING_H
 
 # include "minishell.h"
+# include "tokenization.h"
 
 typedef enum e_node_type
 {

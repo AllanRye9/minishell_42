@@ -13,6 +13,7 @@
 #ifndef TOKENIZING_H
 # define TOKENIZING_H
 
+# include "tokenization.h"
 # include "minishell.h"
 
 typedef enum e_token_type

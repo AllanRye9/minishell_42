@@ -7,14 +7,14 @@ CC				:= cc
 
 CFLAGS			:= -Wall -Werror -Wextra
 
-BUILTINS		:=	builtins/cd.c \
-					builtins/echo.c \
-					builtins/env_utils.c \
-					builtins/env.c \
-					builtins/exit.c \
-					builtins/export.c \
-					builtins/pwd.c \
-					builtins/unset.c
+BUILTINS		:=	built-ins/cd.c \
+					built-ins/echo.c \
+					built-ins/env_utils.c \
+					built-ins/env.c \
+					built-ins/exit.c \
+					built-ins/export.c \
+					built-ins/pwd.c \
+					built-ins/unset.c
 
 CLEAN			:=	clean/clean.c
 

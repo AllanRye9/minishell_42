@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 t_node *ft_combine(t_token_type id, t_node* left, t_node *right, t_minishell *g)
 {
