@@ -25,6 +25,14 @@ static int	return_homedir(t_minishell *g_shell)
 	return (1);
 }
 
+static int	ft_cd_err_msg(char *err_msg)
+{
+	ft_putstr_fd("minishell: cd: `", 2);
+	ft_putstr_fd(err_msg, 2);
+	ft_putstr_fd("': No such file or directory\n", 2);
+	return (1);
+}
+
 static int	ft_chdir(t_minishell *g_shell)
 {
 	char	*current_dir;
@@ -37,12 +45,10 @@ static int	ft_chdir(t_minishell *g_shell)
 
 int	ft_cd(t_minishell *g_shell, char *path)
 {
-	int	ret_val;
-
 	if (!path)
 		return (return_homedir(g_shell));
 	if (chdir(path) == -1)
-		return (ft_cd_err(path));
+		return (ft_cd_err_msg(path));
 	ft_update_envlst("OLDPWD", ft_get_envlst_val("PWD", g_shell), false, g_shell);
 	return (ft_chdir(g_shell));
 }

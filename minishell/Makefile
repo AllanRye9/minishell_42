@@ -42,6 +42,17 @@ TOKENIZATION	:=	tokenization/appenders.c \
 					tokenization/utils.c \
 					tokenization/tokenizer.c
 
+EXPANDER		:= expander/asteric.c \
+					expander/expander.c \
+					expander/free_arr.c \
+					expander/globber_utils.c \
+					expander/globber.c \
+					expander/handle_emptyquotes.c \
+					expaner_wildcard.c \
+					expander/heredoc_expander.c \
+					expander/quotes.c \
+					expander/split_expand.c 
+
 START			:=  start/main.c
 
 SIGNALS			:= 	signals/signals.c
@@ -53,6 +64,7 @@ SRCS			:=	$(BUILTINS)\
 					$(TOKENIZATION)\
 					$(START)\
 					$(SIGNALS)\
+					$(EXPANDER)\
 
 OBJS		:=		$(SRCS:.c=.o)
 

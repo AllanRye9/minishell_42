@@ -12,6 +12,14 @@
 
 #include "minishell.h"
 
+int ft_strcmp(const char *a, const char *b)
+{
+	int i = 0;
+	while(a[i] && b[i] && a[i] == b[i])
+		i++;
+	return (a[i] - b[i]);
+}
+
 void	ft_envlst_back(t_env *new_env, t_minishell *g_shell)
 {
 	t_env	*curr_env;

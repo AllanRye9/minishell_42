@@ -13,8 +13,8 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-# include "minishell.h"
-# include "tokenization.h"
+#include "tokenization.h"
+#include "minishell.h"
 
 typedef enum e_node_type
 {

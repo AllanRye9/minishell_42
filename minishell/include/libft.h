@@ -29,11 +29,11 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
 # endif
-
+typedef struct s_minishell t_minishell;
 typedef struct s_list
 {
 	void			*content;
-	struct s_list		*next;
+	struct s_list	*next;
 }					t_list;
 
 int			ft_tolower(int c);

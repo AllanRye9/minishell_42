@@ -38,11 +38,10 @@ static void	ft_skip_spaces_sign(char *arg, int *i, int *sign)
 	}
 }
 
-void	exit_with_code(char *args, t_minishell *g_shell)
+int	exit_with_code(char *args, t_minishell *g_shell)
 {
 	int					i;
 	int					sign;
-	int					exit_s;
 	unsigned long long	result;
 
 	i = 0;
@@ -51,9 +50,9 @@ void	exit_with_code(char *args, t_minishell *g_shell)
 	if (!ft_isnum(args + i))
 	{
 		ft_putstr_fd("minishell: exit:", STDERR_FILENO);
-		ft_putstr_fd(args[1], STDERR_FILENO);
+		ft_putstr_fd(args, STDERR_FILENO);
 		ft_putendl_fd(": -n where n is a numeric", STDERR_FILENO);
-		ft_clean_ms(g_shell);
+		ft_clean(g_shell);
 		exit(EXIT_FAILURE);
 	}
 	result = 0;
@@ -63,9 +62,9 @@ void	exit_with_code(char *args, t_minishell *g_shell)
 		if (result > LONG_MAX)
 		{
 			ft_putstr_fd("minishell: exit:", STDERR_FILENO);
-			ft_putstr_fd(args[1], STDERR_FILENO);
+			ft_putstr_fd(args, STDERR_FILENO);
 			ft_putendl_fd(": -n where n is a numeric", STDERR_FILENO);
-			ft_clean_ms(g_shell);
+			ft_clean(g_shell);
 			exit(EXIT_FAILURE);
 		}
 		i++;
@@ -81,11 +80,11 @@ void	ft_exit(t_minishell *g_shell, char **args)
 	if (args[1] && args[2] && ft_isnum(args[1]))
 	{
 		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
-		ft_clean_ms(g_shell);
+		ft_clean(g_shell);
 		exit(exit_status);
 	}
 	else
-		exit_status = ft_exit_with_code(args[1], g_shell);
-	ft_clean_ms(g_shell);
+		exit_status = exit_with_code(args[1], g_shell);
+	ft_clean(g_shell);
 	exit(exit_status);
 }

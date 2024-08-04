@@ -43,9 +43,9 @@ static void	print_exportlst(t_minishell *g_shell)
 			while (envlst->value[i])
 			{
 				if ((envlst->value)[i] == '$' || (envlst->value)[i] == '"')
-					print("\\%c", (envlst->value)[i++]);
+					printf("\\%c", (envlst->value)[i++]);
 				else
-					print("%c", (envlst->value)[i++]);
+					printf("%c", (envlst->value)[i++]);
 			}
 			printf("\"\n");
 		}
