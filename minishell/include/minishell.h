@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/04 01:34:03 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/04 13:19:28 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,7 @@ char	*ft_handle_squotes(char *args, size_t *i);
 char	*ft_handle_arg(char *args, size_t *i);
 char	*ft_rm_quotes(char *arg);
 bool	ft_match_star(char *pattern, char *args);
+bool	is_delimeter(char *deli, char *arg);
+void	*ft_garbage_collector(void *ptr, bool clean);
 
 #endif
