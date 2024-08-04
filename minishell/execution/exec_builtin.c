@@ -1,0 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_builtin.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/04 16:43:39 by sbartoul          #+#    #+#             */
+/*   Updated: 2024/08/04 16:50:34 by sbartoul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/minishell.h"
+
+bool	ft_is_builtin(char *arg)
+{
+	if (!arg)
+		return (false);
+	if (!ft_strcmp(arg, "echo")
+		|| !ft_strcmp(arg, "exit")
+		|| !ft_strcmp(arg, "cd")
+		|| !ft_strcmp(arg, "export")
+		|| !ft_strcmp(arg, "pwd")
+		|| !ft_strcmp(arg, "unset")
+		|| !ft_strcmp(arg, "env"))
+		return (true);
+	return (false);
+}
+
+int	ft_exec_builtin(char **args, t_minishell *g_shell)
+{
+	if (ft_strcmp(args[0], "echo") == 0)
+		return (ft_echo(args));
+	if (ft_strcmp(args[0], "exit") == 0)
+		return (ft_(args));
+	if (ft_strcmp(args[0], "cd") == 0)
+		return (ft_(args));
+	if (ft_strcmp(args[0], "export") == 0)
+		return (ft_(args));
+	if (ft_strcmp(args[0], "pwd") == 0)
+		return (ft_(args));
+	if (ft_strcmp(args[0], "unset") == 0)
+		return (ft_(args));
+	if (ft_strcmp(args[0], "env") == 0)
+		return (ft_(args));
+	ft_exit(args, g_shell);
+	return (ENO_GENERAL);
+}

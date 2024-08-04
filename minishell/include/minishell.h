@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/04 13:19:28 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/04 17:35:33 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "libft.h"
 # include "parsing.h"
 # include "tokenization.h"
+# include "colors.h"
 
 int		sig_pipe[2];
 
@@ -142,5 +143,24 @@ char	*ft_rm_quotes(char *arg);
 bool	ft_match_star(char *pattern, char *args);
 bool	is_delimeter(char *deli, char *arg);
 void	*ft_garbage_collector(void *ptr, bool clean);
+int		ft_exec_node(t_node *tree, bool piped, t_minishell *g_shell);
+t_path	ft_get_path(char *cmd, t_minishell *g_shell);
+int		ft_exec_cmd(t_node *node, bool piped, t_minishell *g_shell);
+
+//error
+t_err	ft_check_exec(char *file, bool cmd);
+int		ft_err_msg(t_err err);
+int		ft_get_exitstatus(int status);
+
+//builtin
+bool	ft_is_builtin(char *arg);
+int		ft_exec_builtin(char **args, t_minishell *g_shell);
+t_err	ft_check_read(char *file);
+t_err	ft_check_write(char *file);
+
+//in&out
+int		ft_in(t_io_node *io_list, int *status);
+int		ft_out(t_io_node *io_list, int *status);
+int		ft_append(t_io_node *io_list, int *status);
 
 #endif

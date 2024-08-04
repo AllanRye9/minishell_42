@@ -6,13 +6,13 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 13:22:43 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/04 13:40:53 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/04 17:10:02 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ft_get_exit_status(int status)
+int	ft_get_exitstatus(int status)
 {
 	if (WIFSIGNALED(status))
 		return (128 + WTERMSIG(status));
@@ -90,6 +90,6 @@ int	ft_exec_node(t_node *tree, bool piped, t_minishell *g_shell)
 		return (ft_exec_node(tree->right, false, g_shell));
 	}
 	else
-		return (ft_exec_simple_cmd(tree, piped, g_shell));
+		return (ft_exec_cmd(tree, piped, g_shell));
 	return (ENO_GENERAL);
 }
