@@ -36,7 +36,7 @@ static void	ft_exec_child(t_node *node, int fd[2], t_ast_direction direction, t_
 		close(fd[0]);
 	}
 	status = ft_exec_node(node, true, g_shell);
-	(ft_clean_ms(g_shell), exit(status));
+	(ft_clean(g_shell), exit(status));
 }
 
 static	int ft_exec_pipe(t_node *tree, t_minishell *g_shell)

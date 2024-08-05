@@ -12,16 +12,27 @@
 
 #include "minishell.h"
 
-t_token *creat_new_token(char *value, t_token_type type)
+t_node	*ft_new_node(t_node_type type)
 {
-    t_token *new;
-    
-    new = (t_token *)ft_calloc(1, sizeof(t_token));
-    if(!new)
-        return NULL;
-    new->value = value;
-    new->type = type;
-    return (new);
+	t_node	*new_node;
+
+	new_node = (t_node *)ft_calloc(1, sizeof(t_node));
+	if (!new_node)
+		return (NULL);
+	new_node->type = type;
+	return (new_node);
+}
+
+t_token	*creat_new_token(char *value, t_token_type type)
+{
+	t_token	*new_token;
+
+	new_token = (t_token *)ft_calloc(1, sizeof(t_token));
+	if (!new_token)
+		return (NULL);
+	new_token->value = value;
+	new_token->type = type;
+	return (new_token);
 }
 
 void add_token_back(t_token **lst, t_token *new)

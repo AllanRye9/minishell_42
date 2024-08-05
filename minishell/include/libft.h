@@ -50,6 +50,7 @@ int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 int			ft_printf_char(int c);
 int			ft_printf_str(char *str);
+void		ft_free_char2(char **tofree);
 int			ft_printf_interger(long num, int base, int islower);
 int			ft_printf_pointer(unsigned long long pointer, int pointer_prefix);
 int			ft_printf_specifier(char specified, va_list ap);

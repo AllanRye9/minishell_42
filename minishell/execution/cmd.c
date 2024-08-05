@@ -56,15 +56,15 @@ static int	ft_exec_child(t_node *node, t_minishell *g_shell)
 	{
 		status = ft_redirection(node);
 		if (status != ENO_SUCCESS)
-			(ft_clean_ms(g_shell), exit(ENO_GENERAL));
+			(ft_clean(g_shell), exit(ENO_GENERAL));
 		path_status = ft_get_path((node->expanded_args)[0], g_shell);
 		if (path_status.err.no != ENO_SUCCESS)
 		{
 			status = ft_err_msg(path_status.err);
-			(ft_clean_ms(g_shell), exit(status));
+			(ft_clean(g_shell), exit(status));
 		}
 		if (execve(path_status.path, node->expanded_args, g_shell->environ) == -1)
-			(ft_clean_ms(g_shell), exit(1));
+			(ft_clean(g_shell), exit(1));
 	}
 	waitpid(fork_pid, &status, 0);
 	g_sig_handler.signint_child = false;

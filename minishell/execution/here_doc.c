@@ -26,7 +26,7 @@ void	ft_heredoc(t_io_node *io, int fd[2], t_minishell *g_shell)
 
 	signal(SIGINT, heredoc_sigint);
 	if (g_sig_handler.cleanup_needed)
-		ft_clean_ms(g_shell);
+		ft_clean(g_shell);
 	quote = io->value;
 	while (*quote && *quote != '"' && *quote != '\'')
 		quote++;

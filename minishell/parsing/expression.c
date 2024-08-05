@@ -18,7 +18,7 @@ t_node *ft_combine(t_token_type id, t_node* left, t_node *right, t_minishell *g)
     
     if(g->parse_err.type)
         return (NULL);
-    node = creat_new_token(ft_get_node_type(id));
+    node = ft_new_node(ft_get_node_type(id));
     if(!node)
         return(ft_set_parse_err(E_MEM, g), NULL);
     node ->left = left;

@@ -57,11 +57,11 @@ START			:=  start/main.c
 
 SIGNALS			:= 	signals/signals.c
 
-SRCS			:=	$(BUILTINS)\
+SRCS			:=	$(PARSING)\
+					$(TOKENIZATION)\
+					$(BUILTINS)\
 					$(CLEAN)\
 					$(EXEC)\
-					$(PARSING)\
-					$(TOKENIZATION)\
 					$(START)\
 					$(SIGNALS)\
 					$(EXPANDER)\

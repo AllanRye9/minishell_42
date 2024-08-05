@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int ft_append_separators(t_token_type t, char **line, char **token_list)
+int ft_append_separators(t_token_type t, char **line, t_token **token_list)
 {
     t_token *token;
     
@@ -40,7 +40,7 @@ int ft_append_identifiers(char **line, t_token **token_list, t_minishell *g)
         if(ft_is_quote(arr[i]))
         {
             if(!ft_skip_quotes(arr, &i))
-                return (ft_print_quotes_err(arr[i], g), NULL);
+                return (ft_print_quotes_err(arr[i], g), 0);
         }
         else
             i++;

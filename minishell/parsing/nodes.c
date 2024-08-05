@@ -52,7 +52,7 @@ void    ft_append_io_node(t_io_node **lst, t_io_node *new)
     c->next = new;
 }
 
-t_node_type ft_get_node_type(t_node_type t)
+t_node_type ft_get_node_type(t_token_type t)
 {
     if(t == T_AND)
         return (N_AND);

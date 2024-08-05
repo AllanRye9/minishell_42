@@ -50,7 +50,7 @@ int main(int argc, char **argv, char **env)
         g_shell.line = readline(PROMPT_MSG);
         if (!g_shell.line)
 		{
-            ft_clean_ms(&g_shell);
+            ft_clean(&g_shell);
             ft_putstr_fd("exit\n", STDOUT_FILENO);
             exit(g_shell.exit_s);
         }
@@ -66,5 +66,5 @@ int main(int argc, char **argv, char **env)
                 ft_handle_parse_err(&g_shell);
         }
     }
-    return (ft_clean_ms(&g_shell), g_shell.exit_s);
+    return (ft_clean(&g_shell), g_shell.exit_s);
 }

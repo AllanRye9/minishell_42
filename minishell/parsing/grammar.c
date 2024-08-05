@@ -18,7 +18,7 @@ t_node *ft_get_cmds(t_minishell *g)
     
     if(g->parse_err.type)
         return (NULL);
-    node = creat_new_token(N_CMD);
+    node = ft_new_node(N_CMD);
     if(!node)
         return (ft_set_parse_err(E_MEM, g), NULL);
     while(g->curr_token && (g->curr_token->type == IDENTIFIER

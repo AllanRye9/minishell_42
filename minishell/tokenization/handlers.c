@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int ft_identify_separators(char **line, char **token_list)
+int ft_identify_separators(char **line, t_token **token_list)
 {
     if (!ft_strncmp(*line, "<<", 2))
 		return (ft_append_separators(T_HEREDOC, line, token_list) && 1);
