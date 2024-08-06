@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 17:11:35 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/04 17:35:54 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:03:30 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ int	ft_append(t_io_node *io_list, int *status)
 	if (!io_list->expanded_value || io_list->expanded_value[1])
 	{
 		*status = ft_err_msg((t_err){ENO_GENERAL, ERRMSG_AMBIGUOUS, io_list->value});
+		return (*status);
+	}
+	fd = open(io_list->expanded_value[0], O_CREAT | O_WRONLY | O_APPEND | 0644);
+	if (fd == -1)
+	{
+		*status = ft_err_msg(ft_check_write(io_list->expanded_value[0]));
 		return (*status);
 	}
 	dup2(fd, STDOUT_FILENO);

@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:39:35 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/03 23:45:46 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:20:52 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*ft_extract_key(char *str)
 	while (str[i])
 	{
 		if (str[i] == '=')
-			return (ft_garbage_collector(ft_substr(str, 0, i)), false);
+			return (ft_garbage_collector(ft_substr(str, 0, i), false));
 		i++;
 	}
 	return (ft_strdup(str));
@@ -74,7 +74,7 @@ char	*ft_extract_key(char *str)
 void	ft_init_envlst(t_minishell *g_shell)
 {
 	int		i;
-	char	*environ;
+	char	**environ;
 	char	*key;
 	char	*value;
 

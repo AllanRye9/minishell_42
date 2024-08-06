@@ -6,91 +6,57 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 21:28:39 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/01 13:21:45 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:59:53 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**del_loop(char **environ, char **ret_strings, char *argv)
+static void	ft_unset_helper(char *key, t_minishell *g_shell)
 {
-	int	i;
-	int	j;
+	t_env	*current;
+	t_env	*prev;
 
-	i = 0;
-	j = 0;
-	while (environ[i] != NULL)
+	prev = NULL;
+	current = g_shell->envlst;
+	while (current)
 	{
-		if (!(ft_strncmp(environ[i], argv, after_eql_sign(environ[i]) - 1) == 0
-				&& argv[after_eql_sign(environ[i])] == '\0'
-				&& environ[i][ft_strlen(argv)] == '='))
+		if (!ft_strcmp(key, current->key))
 		{
-			ret_strings = ft_strdup(environ[i]);
-			if (ret_strings[j] == NULL)
-			{
-				free_doublearr(ret_strings);
-				return (ret_strings);
-			}
-			j++;
+			if (prev)
+				prev->next = current->next;
+			else
+				g_shell->envlst = current->next;
+			free(current);
+			return ;
 		}
-		i++;
+		prev = current;
+		current = current->next;
 	}
-	return (ret_strings);
 }
 
-char	**del_var(char **environ, char *argv)
+int	ft_unset(t_minishell *g_shell, char **args)
 {
-	char	**ret_strings;
 	int		i;
+	bool	error;
 
-	i = 0;
-	while (environ[i] != NULL)
-		i++;
-	ret_strings = ft_calloc(sizeof(char *), i + 1);
-	if (!ret_strings)
-		return (NULL);
-	ret_strings = del_loop(environ, ret_strings, argv);
-}
-
-int	error_in_unset(char **args)
-{
-	int	i;
-
-	i = 0;
+	i = 1;
 	if (!args[1])
+		return (0);
+	error = false;
+	while (args[i])
 	{
-		ft_putendl_fd("minishell: unset: not enough arguments", STDERR_FILENO);
-		return (EXIT_FAILURE);
-	}
-	while (args[1][i])
-	{
-		if (args[1][i] == '/')
+		if (!ft_check_key(args[i]))
 		{
-			ft_putstr_fd("minishell: unset: `", STDERR_FILENO);
-			ft_putstr_fd(args[1], STDERR_FILENO);
-			ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
-			return (EXIT_FAILURE);
+			ft_putstr_fd("minishell: unset: `", 2);
+			ft_putstr_fd(args[i], 2);
+			ft_putstr_fd("': not a valid identifier\n", 2);
+			error = true;
 		}
+		else
+			ft_unset_helper(
+				ft_garbage_collector(ft_extract_key(args[i]), false), g_shell);
+		i++;
 	}
-	if (after_eql_sign(args[1] != 0))
-	{
-		ft_putendl_fd("minishell: unset: not a valid identifier", STDERR_FILENO);
-		return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
-}
-
-int	unset(t_minishell *g_shell, char **args)
-{
-	char	**tmp;
-
-	if (error_in_unset(args) == 1)
-		return (EXIT_FAILURE);
-	else
-	{
-		tmp = del_var(g_shell->environ, args[1]);
-		free_doublearr(g_shell->environ);
-		g_shell->environ = tmp;
-	}
-	return (EXIT_SUCCESS);
+	return (error);
 }

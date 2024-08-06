@@ -10,7 +10,9 @@ CFLAGS			:= -Wall -Werror -Wextra
 BUILTINS		:=	built-ins/cd.c \
 					built-ins/echo.c \
 					built-ins/env_utils.c \
+					built-ins/env_val.c \
 					built-ins/env.c \
+					built-ins/errors.c \
 					built-ins/exit.c \
 					built-ins/export.c \
 					built-ins/pwd.c \
@@ -18,15 +20,16 @@ BUILTINS		:=	built-ins/cd.c \
 
 CLEAN			:=	clean/clean.c
 
-EXEC			:=	exec/error_msg.c \
-					exec/exec_builtin.c \
-					exec/exec_redirect.c \
-					exec/exec_utils.c \
-					exec/exec.c \
-					exec/exist_check.c \
-					exec/ft_exec_simple_cmd.c \
-					exec/ft_get_path.c \
-					exec/init_tree.c
+EXEC			:=	execution/check.c \
+					execution/cmd.c \
+					execution/errors.c \
+					execution/exec_builtin.c \
+					execution/exec.c \
+					execution/get_path.c \
+					execution/here_doc.c \
+					execution/in_out_append.c \
+					execution/init_tree.c	\
+					execution/utils.c		\
 
 PARSING			:=	parsing/clear.c \
 					parsing/err.c \
@@ -48,12 +51,12 @@ EXPANDER		:= expander/asteric.c \
 					expander/globber_utils.c \
 					expander/globber.c \
 					expander/handle_emptyquotes.c \
-					expaner_wildcard.c \
+					expander/handle_wildcard.c	\
 					expander/heredoc_expander.c \
 					expander/quotes.c \
 					expander/split_expand.c 
 
-START			:=  start/main.c
+START			:=  start/start.c
 
 SIGNALS			:= 	signals/signals.c
 
@@ -68,7 +71,7 @@ SRCS			:=	$(PARSING)\
 
 OBJS		:=		$(SRCS:.c=.o)
 
-READLINE_PATH:=	/goinfre/homebrew/opt/readline
+READLINE_PATH:=	$(shell brew --prefix readline)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ -Iinclude -I$(READLINE_PATH)/include
@@ -79,7 +82,7 @@ $(LIBFT):
 	@make -C $(LIBFT_PATH)
 
 $(NAME): $(LIBFT) $(OBJS)
-	@$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -L$(READLINE_PATH)/lib -lreadline
+	@$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -L$(READLINE_PATH)/lib -lreadline -lhistory
 
 clean:
 	@make clean -C $(LIBFT_PATH)

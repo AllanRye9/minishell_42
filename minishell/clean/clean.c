@@ -17,8 +17,8 @@ static void	ft_clear_envlst(t_minishell *G_shell_)
 
 void	ft_clean(t_minishell *G_shell_)
 {
-	clear_data(NULL, true);
-	ft_clear_ast(&G_shell_->ast, G_shell_);
+	ft_garbage_collector(NULL, true);
+	ft_clear_astree(&G_shell_->ast, G_shell_);
 	ft_clear_envlst(G_shell_);
 	rl_clear_history();
 	tcsetattr(STDIN_FILENO, TCSANOW, &g_sig_handler.original_term);

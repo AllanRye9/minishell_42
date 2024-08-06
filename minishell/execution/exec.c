@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 13:22:43 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/04 17:10:02 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:00:30 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static	int ft_exec_pipe(t_node *tree, t_minishell *g_shell)
 			(close(fd[0]), close(fd[1]), waitpid(pid_l, &status, 0),
 				waitpid(pid_r, &status, 0));
 			g_sig_handler.signint_child = false;
-			return (ft_get_exit_status(status));
+			return (ft_get_exitstatus(status));
 		}
 	}
 	return (ENO_GENERAL);

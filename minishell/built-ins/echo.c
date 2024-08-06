@@ -2,8 +2,10 @@
 
 static int check_options(char *args)
 {
-    int i = 0;
-    if (args[i] == '-')
+    int i;
+
+	i = 0;
+    if (args[i] != '-')
         return (0);
     i++;
     while (args[i])
@@ -15,42 +17,25 @@ static int check_options(char *args)
     return (1);
 }
 
-// Function to print an environment variable
-static void print_env_var(char* var) {
-    char* value = getenv(var);
-    if (value) {
-        ft_putstr_fd(value, 1);
-    } else {
-        ft_putstr_fd("", 1); // Print nothing if the variable is not set
-    }
-}
+int ft_echo(char **args) 
+{
+    int i;
+    int opt;
 
-void ft_echo(char** args) {
-    int i = 0;
-    int opt = 0;
-
-    // Check for -n option
-    if (args[i] && check_options(args[i])) {
+	i = 1;
+	opt = 1;
+    while (args[i] && check_options(args[i])) {
         opt = 1;
         i++;
     }
-
-    // Print the arguments
-    while (args[i]) {
-        if (args[i][0] == '$') {
-            print_env_var(&args[i][1]); // Print environment variable
-        } else {
-            ft_putstr_fd(args[i], 1);
-        }
-
-        if (args[i + 1]) // Print a space if there are more arguments
-            ft_putstr_fd(" ", 1);
-        
-        i++;
+    while (args[i])
+	{
+		ft_putstr_fd(args[i], 1);
+		if (args[i + 1])
+			ft_putstr_fd(" ", 1);
+		i++;
     }
-
-    // Print newline unless -n option was used
-    if (!opt) {
+    if (!opt)
         ft_putstr_fd("\n", 1);
-    }
+	return (0);
 }

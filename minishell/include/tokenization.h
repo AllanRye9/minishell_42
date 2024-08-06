@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:42:11 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/31 17:07:50 by oallan           ###   ########.fr       */
+/*   Updated: 2024/08/06 14:22:03 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int				ft_is_separator(char *s);
 int				ft_is_quote(char c);
 int 			ft_append_separators(t_token_type t, char **line, t_token **token_list);
 int				ft_append_identifiers(char **line, t_token **token_list, t_minishell *g);
+int 			ft_append_separators(t_token_type t, char **line, char **token_list);
 t_token			*ft_token_handler(char *line, t_minishell *g);
 t_token			*ft_tokenize(t_minishell *g);
 t_token			*creat_new_token(char *value, t_token_type type);

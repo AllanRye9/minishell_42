@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:19 by oallan            #+#    #+#             */
-/*   Updated: 2024/07/31 15:56:20 by oallan           ###   ########.fr       */
+/*   Updated: 2024/08/06 18:27:19 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+<<<<<<< HEAD
 t_node	*ft_new_node(t_node_type type)
 {
 	t_node	*new_node;
@@ -33,6 +34,17 @@ t_token	*creat_new_token(char *value, t_token_type type)
 	new_token->value = value;
 	new_token->type = type;
 	return (new_token);
+=======
+t_node *creat_new_token(t_token_type type)
+{
+    t_node *new;
+    
+    new = (t_node *)ft_calloc(1, sizeof(t_node));
+    if(!new)
+        return NULL;
+    new->type = type;
+    return (new);
+>>>>>>> 819205a (fixing compilation error)
 }
 
 void add_token_back(t_token **lst, t_token *new)

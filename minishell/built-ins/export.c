@@ -6,13 +6,13 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 17:42:55 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/01 13:24:49 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:45:16 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_isalpha(char *str)
+int	ft_check_key(char *str)
 {
 	int	i;
 
@@ -49,7 +49,7 @@ static void	print_exportlst(t_minishell *g_shell)
 			}
 			printf("\"\n");
 		}
-		else if (envlst->value = NULL && (ft_strcmp(envlst->key, "_") != 0))
+		else if (envlst->value == NULL && (ft_strcmp(envlst->key, "_") != 0))
 			printf("declare -x %s\n", envlst->key);
 		envlst = envlst->next;
 	}
@@ -67,7 +67,7 @@ int	ft_export(t_minishell *g_shell, char **argv)
 		return (print_exportlst(g_shell), 0);
 	while (argv[i])
 	{
-		if (ft_isalpha(argv[i]) == 0)
+		if (ft_check_key(argv[i]) == 0)
 			exit_status = error_in_export(argv[i]);
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/04 17:35:33 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:57:41 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdbool.h>
+# include <stdlib.h>
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <signal.h>
@@ -123,44 +124,61 @@ void			init_signals(void);
 void			sigquit_handler(int code);
 
 //execution part
-void	init_asttree(t_node *node, t_minishell *g_shell);
-void	ft_heredoc(t_io_node *io, int fd[2], t_minishell *g_shell);
-void	*ft_garbage_collector(void *ptr, bool clean);
+void			init_asttree(t_node *node, t_minishell *g_shell);
+void			ft_heredoc(t_io_node *io, int fd[2], t_minishell *g_shell);
+void			*ft_garbage_collector(void *ptr, bool clean);
 //expander exec
-char	**split_doublearr(char const *args);
-char	**ft_expand(char *args, t_minishell *g_shell);
-void	ft_heredoc_expander(char *args, int fd, t_minishell *g_shell);
-char	*handle_empty_quotes(char *args);
-void	free_doublearr(char **arr);
-void	free_tripearr(char ***arr);
-char	**ft_join_str_arrs(char ***arr);
-bool	ft_is_valid_char(char c);
-char	*ft_get_envlst_val(char *key, t_minishell *g_shell);
-char	*ft_handle_dquotes(char *args, size_t *i, t_minishell *g_shell);
-char	*ft_handle_squotes(char *args, size_t *i);
-char	*ft_handle_arg(char *args, size_t *i);
-char	*ft_rm_quotes(char *arg);
-bool	ft_match_star(char *pattern, char *args);
-bool	is_delimeter(char *deli, char *arg);
-void	*ft_garbage_collector(void *ptr, bool clean);
-int		ft_exec_node(t_node *tree, bool piped, t_minishell *g_shell);
-t_path	ft_get_path(char *cmd, t_minishell *g_shell);
-int		ft_exec_cmd(t_node *node, bool piped, t_minishell *g_shell);
+char			**split_doublearr(char const *args);
+char			**ft_expand(char *args, t_minishell *g_shell);
+void			ft_heredoc_expander(char *args, int fd, t_minishell *g_shell);
+char			*handle_empty_quotes(char *args);
+void			free_doublearr(char **arr);
+void			free_tripearr(char ***arr);
+char			**ft_join_str_arrs(char ***arr);
+bool			ft_is_valid_char(char c);
+char			*ft_get_envlst_val(char *key, t_minishell *g_shell);
+char			*ft_handle_dquotes(char *args, size_t *i, t_minishell *g_shell);
+char			*ft_handle_squotes(char *args, size_t *i);
+char			*ft_handle_arg(char *args, size_t *i);
+char			*ft_rm_quotes(char *arg);
+bool			ft_match_star(char *pattern, char *args);
+bool			is_delimeter(char *deli, char *arg);
+void			*ft_garbage_collector(void *ptr, bool clean);
+int				ft_exec_node(t_node *tree, bool piped, t_minishell *g_shell);
+t_path			ft_get_path(char *cmd, t_minishell *g_shell);
+int				ft_exec_cmd(t_node *node, bool piped, t_minishell *g_shell);
 
 //error
-t_err	ft_check_exec(char *file, bool cmd);
-int		ft_err_msg(t_err err);
-int		ft_get_exitstatus(int status);
+t_err			ft_check_exec(char *file, bool cmd);
+int				ft_err_msg(t_err err);
+int				ft_get_exitstatus(int status);
 
 //builtin
-bool	ft_is_builtin(char *arg);
-int		ft_exec_builtin(char **args, t_minishell *g_shell);
-t_err	ft_check_read(char *file);
-t_err	ft_check_write(char *file);
+bool			ft_is_builtin(char *arg);
+int				ft_exec_builtin(char **args, t_minishell *g_shell);
+t_err			ft_check_read(char *file);
+t_err			ft_check_write(char *file);
+int				ft_check_key(char *str);
 
 //in&out
-int		ft_in(t_io_node *io_list, int *status);
-int		ft_out(t_io_node *io_list, int *status);
-int		ft_append(t_io_node *io_list, int *status);
+int				ft_in(t_io_node *io_list, int *status);
+int				ft_out(t_io_node *io_list, int *status);
+int				ft_append(t_io_node *io_list, int *status);
+
+char			*ft_extract_key(char *str);
+bool			ft_env_entry_exist(char *key, t_minishell *g_shell);
+char			*ft_extract_value(char *str);
+
+void 			ft_clear_astree(t_node **astree, t_minishell *g);
+
+//commands
+
+int				ft_cd(t_minishell *g_shell, char *path);
+int 			ft_echo(char** args);
+int				ft_env(t_minishell *g_shell);
+void			ft_exit(t_minishell *g_shell, char **args);
+int				ft_export(t_minishell *g_shell, char **argv);
+int				ft_pwd(void);
+int				ft_unset(t_minishell *g_shell, char **args);
 
 #endif
