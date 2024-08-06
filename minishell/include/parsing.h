@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:48:10 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/06 20:34:02 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/06 20:34:59 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_node_type				ft_get_node_type(t_token_type t);
 t_io_type				ft_get_io_type(t_token_type t);
 t_io_node				*ft_new_io_node(t_token_type t, char *value);
 t_node					*ft_define_grammar(t_minishell *g);
-t_node                 *creat_new_token(t_token_type type);
+t_node					*creat_new_token(t_token_type type);
 t_node					*ft_combine(t_token_type id, t_node* left, t_node *right, t_minishell *g);
 t_node					*ft_expression(int i, t_minishell *g);
 t_node					*ft_parse(t_minishell *g);
