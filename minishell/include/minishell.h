@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/06 17:57:41 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/07 11:37:33 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,5 +180,7 @@ void			ft_exit(t_minishell *g_shell, char **args);
 int				ft_export(t_minishell *g_shell, char **argv);
 int				ft_pwd(void);
 int				ft_unset(t_minishell *g_shell, char **args);
+
+void			ft_init_envlst(t_minishell *g_shell);
 
 #endif

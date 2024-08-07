@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:42:11 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/06 20:31:54 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/07 11:13:45 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ int 			ft_append_separators(t_token_type t, char **line, t_token **token_list);
 int				ft_append_identifiers(char **line, t_token **token_list, t_minishell *g);
 t_token			*ft_token_handler(char *line, t_minishell *g);
 t_token			*ft_tokenize(t_minishell *g);
-t_node			*creat_new_token(char *value, t_token_type type);
+t_token			*creat_new_token(char *value, t_token_type type);
 
 #endif

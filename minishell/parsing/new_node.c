@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_arr.c                                         :+:      :+:    :+:   */
+/*   new_node.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/03 18:45:10 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/07 11:40:17 by sbartoul         ###   ########.fr       */
+/*   Created: 2024/08/07 11:17:05 by sbartoul          #+#    #+#             */
+/*   Updated: 2024/08/07 11:21:53 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	free_doublearr(char **arr)
+t_node	*ft_new_node(t_node_type type)
 {
-	size_t	i;
+	t_node	*new_node;
 
-	if (!arr)
-		return ;
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
-}
-
-void	free_tripearr(char ***arr)
-{
-	size_t	i;
-
-	if (!arr)
-		return ;
-	i = 0;
-	while (arr[i])
-		free_doublearr(arr[i++]);
-	free(arr);
+	new_node = (t_node *)ft_calloc(1, sizeof(t_node));
+	if (!new_node)
+		return (NULL);
+	new_node->type = type;
+	return (new_node);
 }

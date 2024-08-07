@@ -37,12 +37,13 @@ PARSING			:=	parsing/clear.c \
 					parsing/grammar.c \
 					parsing/nodes.c \
 					parsing/utils.c \
-					parsing/parser.c
+					parsing/parser.c	\
+					parsing/new_node.c	\
 
 TOKENIZATION	:=	tokenization/appenders.c \
 					tokenization/handlers.c \
 					tokenization/clear.c \
-					tokenization/utils.c \
+					tokenization/token_utils.c \
 					tokenization/tokenizer.c
 
 EXPANDER		:= expander/asteric.c \

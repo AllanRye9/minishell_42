@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:19 by oallan            #+#    #+#             */
-/*   Updated: 2024/08/06 20:31:07 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/07 11:33:13 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_node *creat_new_token(t_token_type type)
+t_token *creat_new_token(char *value, t_token_type type)
 {
-    t_node *new;
+    t_token *new;
     
-    new = (t_node *)ft_calloc(1, sizeof(t_node));
+    new = (t_token *)ft_calloc(1, sizeof(t_node));
     if(!new)
         return NULL;
     new->type = type;
+	new->value = value;
     return (new);
 }
 
