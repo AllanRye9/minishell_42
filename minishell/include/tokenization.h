@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: oallan <oallan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:42:11 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/07 11:13:45 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:15:11 by oallan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ typedef struct s_token
 	struct s_token		*prev;
 }	t_token;
 
-
-//functions here ----->
 bool			ft_skip_quotes(char *line, size_t *l);
 void			ft_print_quotes_err(char c, t_minishell *g);
 void			ft_skip_spaces(char **line);

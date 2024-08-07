@@ -43,7 +43,7 @@ static char	**ft_globber_helper(char *args)
 	else
 	{
 		dir = opendir(".");
-		returned = (char *)ft_calloc(match_count + 1, sizeof(char *));
+		returned = (char **)ft_calloc(match_count + 1, sizeof(char *));
 		match_count = 0;
 		while (ft_set_direntry(&entry, dir) && entry)
 			if (ft_asteric(args, entry->d_name)

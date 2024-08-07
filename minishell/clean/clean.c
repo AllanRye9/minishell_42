@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   clean.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oallan <oallan@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/07 12:23:55 by oallan            #+#    #+#             */
+/*   Updated: 2024/08/07 12:24:06 by oallan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	ft_clear_envlst(t_minishell *G_shell_)
@@ -20,6 +32,6 @@ void	ft_clean(t_minishell *G_shell_)
 	ft_garbage_collector(NULL, true);
 	ft_clear_astree(&G_shell_->ast, G_shell_);
 	ft_clear_envlst(G_shell_);
-	rl_clear_history();
+	clear_history();
 	tcsetattr(STDIN_FILENO, TCSANOW, &g_sig_handler.original_term);
 }

@@ -143,10 +143,12 @@ char			*ft_handle_arg(char *args, size_t *i);
 char			*ft_rm_quotes(char *arg);
 bool			ft_match_star(char *pattern, char *args);
 bool			is_delimeter(char *deli, char *arg);
+bool			ft_contains_asterisk(char *args);
 void			*ft_garbage_collector(void *ptr, bool clean);
 int				ft_exec_node(t_node *tree, bool piped, t_minishell *g_shell);
 t_path			ft_get_path(char *cmd, t_minishell *g_shell);
 int				ft_exec_cmd(t_node *node, bool piped, t_minishell *g_shell);
+size_t			ft_match_count(char *pattern);
 
 //error
 t_err			ft_check_exec(char *file, bool cmd);

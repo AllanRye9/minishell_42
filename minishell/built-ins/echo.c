@@ -49,5 +49,5 @@ int ft_echo(char **args)
     }
     if (!opt)
         ft_putstr_fd("\n", 1);
-	return (0);
+return (0);
 }
