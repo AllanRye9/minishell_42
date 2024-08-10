@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:54:52 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/03 14:08:10 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/10 23:17:52 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,15 @@ static char	**ft_filler(char const *args, char **str)
 	j = 0;
 	while (args[i] && str[j])
 	{
-		if (args[i] && str[j])
+		if (args[i] != ' ')
 		{
-			if (args[i] != ' ')
-			{
-				ft_word_filler(args, str, &i, j);
-				j++;
-			}
-			while (args[i] && args[i] == ' ')
-				i++;
+			ft_word_filler(args, str, &i, j);
+			j++;
 		}
-		return (str);
+		while (args[i] && args[i] == ' ')
+			i++;
 	}
+	return (str);
 }
 
 static void	ft_skip_word(char const *args, size_t *i)
@@ -69,7 +66,7 @@ static void	ft_skip_word(char const *args, size_t *i)
 			quotes = args[(*i)++];
 			while (args[(*i)] != quotes)
 				(*i)++;
-			(*i++);
+			(*i)++;
 		}
 	}
 }
@@ -117,10 +114,10 @@ char	**split_doublearr(char const *args)
 		while (args[i] && args[i] == ' ')
 			i++;
 	}
-	args = ft_calloc(count + 1, sizeof(char *));
+	str = ft_calloc(count + 1, sizeof(char *));
 	free_str = str;
 	str = ft_allocator(args, str);
 	if (!str || !count)
-		return (ft_free_chars(free_str), NULL);
+		return (free_doublearr(free_str), NULL);
 	return (ft_filler(args, str));
 }

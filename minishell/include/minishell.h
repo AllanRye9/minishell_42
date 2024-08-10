@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/07 11:37:33 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/10 23:05:04 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ bool			ft_env_entry_exist(char *key, t_minishell *g_shell);
 char			*ft_extract_value(char *str);
 
 void 			ft_clear_astree(t_node **astree, t_minishell *g);
+char	*ft_handle_dollar(char *args, size_t *i, t_minishell *g_shell);
 
 //commands
 
@@ -184,5 +185,6 @@ int				ft_pwd(void);
 int				ft_unset(t_minishell *g_shell, char **args);
 
 void			ft_init_envlst(t_minishell *g_shell);
+size_t			ft_str_arr_len(char **args);
 
 #endif

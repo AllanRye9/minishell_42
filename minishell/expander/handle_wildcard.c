@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 22:06:53 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/03 23:54:56 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/10 23:06:41 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_handle_dquotes(char *args, size_t *i, t_minishell *g_shell)
 		if (args[*i] == '$')
 			tmp = ft_strjoin_f(tmp, ft_handle_dollar(args, i, g_shell));
 		else
-			tmp = ft_strjoin_f(tmp, ft_handle_dquotes_args(args, i));
+			tmp = ft_strjoin_f(tmp, ft_handle_dquote_args(args, i));
 	}
 	(*i)++;
 	return (ft_strjoin_f(tmp, ft_strdup("\"")));

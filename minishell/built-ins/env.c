@@ -6,13 +6,13 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:05:21 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/31 16:48:00 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/11 00:46:01 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
-int	env(t_minishell *g_shell)
+int	ft_env(t_minishell *g_shell)
 {
 	t_env	*lst;
 

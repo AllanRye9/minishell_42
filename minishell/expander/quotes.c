@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 01:01:22 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/04 01:11:06 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/10 23:08:45 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	ft_unquote_filler(char *args, size_t *i, char *ret_val, size_t *j)
 
 	quotes = args[(*i)++];
 	while (args[*i] != quotes)
-		ret_val[(*i)++] = args[(*i)++];
+		ret_val[(*j)++] = args[(*i)++];
 	(*i)++;
 }
 

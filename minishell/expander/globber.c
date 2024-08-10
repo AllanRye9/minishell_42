@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 16:51:51 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/03 21:54:54 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/10 22:59:06 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static char	**ft_globber_helper(char *args)
 		returned = (char **)ft_calloc(match_count + 1, sizeof(char *));
 		match_count = 0;
 		while (ft_set_direntry(&entry, dir) && entry)
-			if (ft_asteric(args, entry->d_name)
-				&& ft_visible(args, entry->d_name))
+			if (ft_match_star(args, entry->d_name)
+				&& ft_matches_visibility(args, entry->d_name))
 				returned[match_count++] = ft_strdup(entry->d_name);
 			closedir(dir);
 	}
