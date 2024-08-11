@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:13:20 by oallan            #+#    #+#             */
-/*   Updated: 2024/08/07 12:13:49 by oallan           ###   ########.fr       */
+/*   Updated: 2024/08/11 14:45:39 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ void init_signals(void)
 	g_sig_handler.cleanup_needed = false;
 	g_sig_handler.heredoc_sgint = false;
 	g_sig_handler.signint_child = false;
-	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
 }

@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:45:43 by oallan            #+#    #+#             */
-/*   Updated: 2024/08/06 18:09:16 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/11 14:57:50 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int			ft_isalpha(int c);
 int			ft_isalnum(int c);
 int			ft_lstsize(t_list *lst);
 int			ft_atoi_base(const char *str, int base);
+int			ft_strcmp(const char *s1, const char *s2);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 int			ft_printf_char(int c);

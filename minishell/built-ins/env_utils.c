@@ -6,19 +6,19 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:45:59 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/11 13:17:43 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/11 15:49:30 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_strcmp(const char *a, const char *b)
-{
-	int i = 0;
-	while(a[i] && b[i] && a[i] == b[i])
-		i++;
-	return (a[i] - b[i]);
-}
+// int ft_strcmp(const char *a, const char *b)
+// {
+// 	int i = 0;
+// 	while(a[i] && b[i] && a[i] == b[i])
+// 		i++;
+// 	return (a[i] - b[i]);
+// }
 
 void	ft_envlst_back(t_env *new_env, t_minishell *g_shell)
 {

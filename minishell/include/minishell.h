@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/10 23:05:04 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/11 14:54:50 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int				is_digit(char *str);
 int				custom_exit(t_minishell *g_shell, char **args);
 int				error_in_export(char *arg);
 int				invalid_id(char c);
-int				ft_strcmp(const char *a, const char *b);
+// int				ft_strcmp(const char *a, const char *b);
 int				after_eql_sign(char *str);
 char			**add_var(char **env, char *argv);
 int				custom_export(t_minishell *g_shell, char **argv);
