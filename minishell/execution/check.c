@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 15:27:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/04 17:33:56 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/11 14:11:02 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ t_err	ft_check_exec(char *file, bool cmd)
 {
 	if (!*file)
 		return ((t_err){ENO_GENERAL, ERRMSG_NO_SUCH_FILE, file});
-
 	if (access(file, F_OK) == 0)
 	{
 		if (access(file, X_OK) == -1)

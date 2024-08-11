@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 11:35:05 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/31 17:20:59 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/11 14:05:50 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	exit_with_code(char *args, t_minishell *g_shell)
 {
 	int					i;
 	int					sign;
+	int					exit_status;
 	unsigned long long	result;
 
 	i = 0;
@@ -49,11 +50,9 @@ int	exit_with_code(char *args, t_minishell *g_shell)
 	ft_skip_spaces_sign(args, &i, &sign);
 	if (!ft_isnum(args + i))
 	{
-		ft_putstr_fd("minishell: exit:", STDERR_FILENO);
-		ft_putstr_fd(args, STDERR_FILENO);
-		ft_putendl_fd(": -n where n is a numeric", STDERR_FILENO);
+		exit_status = ft_err_msg((t_err){ENO_EXEC_255, ERRMSG_NUMERIC_REQUI, args});
 		ft_clean(g_shell);
-		exit(EXIT_FAILURE);
+		exit(exit_status);
 	}
 	result = 0;
 	while (args[i])
@@ -61,11 +60,8 @@ int	exit_with_code(char *args, t_minishell *g_shell)
 		result = (result * 10) + (args[i] - '0');
 		if (result > LONG_MAX)
 		{
-			ft_putstr_fd("minishell: exit:", STDERR_FILENO);
-			ft_putstr_fd(args, STDERR_FILENO);
-			ft_putendl_fd(": -n where n is a numeric", STDERR_FILENO);
-			ft_clean(g_shell);
-			exit(EXIT_FAILURE);
+			exit_status = ft_err_msg((t_err){ENO_EXEC_255, ERRMSG_NUMERIC_REQUI, args});
+			(ft_clean(g_shell), exit(exit_status));
 		}
 		i++;
 	}
@@ -77,11 +73,14 @@ void	ft_exit(t_minishell *g_shell, char **args)
 	int	exit_status;
 
 	exit_status = g_shell->exit_s;
-	if (args[1] && args[2] && ft_isnum(args[1]))
+	if (args[1])
 	{
-		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
-		ft_clean(g_shell);
-		exit(exit_status);
+		if (args[2] && ft_isnum(args[1]))
+		{
+			exit_status = ft_err_msg((t_err){ENO_GENERAL, ERRMSG_TOO_MANY_ARGS, NULL});
+			ft_clean(g_shell);
+			exit(exit_status);
+		}
 	}
 	else
 		exit_status = exit_with_code(args[1], g_shell);

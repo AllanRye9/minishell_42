@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 14:59:22 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/06 17:51:58 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/11 14:08:56 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_reset_stds(bool piped, t_minishell *g_shell)
 	if (piped)
 		return ;
 	dup2(g_shell->stdin, 0);
-	dup2(g_shell->stdout, 0); //might be error here the stdin is standard stdin
+	dup2(g_shell->stdout, 1);
 }
 
 int	ft_redirection(t_node *node)

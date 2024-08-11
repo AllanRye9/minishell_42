@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:45:59 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/07/31 16:39:01 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/11 13:17:43 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static t_env	*ft_envlst_new(char *key, char *value)
 	if (value)
 		new_env->value = ft_garbage_collector(ft_strdup(value), false);
 	new_env->next = NULL;
-	return (NULL);
+	return (new_env);
 }
 
 void	ft_update_envlst(char *key, char *value, bool create, t_minishell *g_shell)

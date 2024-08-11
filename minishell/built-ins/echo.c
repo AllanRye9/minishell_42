@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:17:46 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/07 11:17:49 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/11 13:16:28 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int ft_echo(char **args)
 
 	i = 1;
 	opt = 1;
-    while (args[i] && check_options(args[i])) {
+    while (args[i] && check_options(args[i]) == 1) {
         opt = 1;
         i++;
     }

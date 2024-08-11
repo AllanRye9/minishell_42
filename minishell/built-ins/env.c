@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:05:21 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/11 00:46:01 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/11 13:19:38 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ int	ft_env(t_minishell *g_shell)
 			printf("%s=%s\n", lst->key, lst->value);
 		lst = lst->next;
 	}
-	return (EXIT_SUCCESS);
+	return (ENO_SUCCESS);
 }
