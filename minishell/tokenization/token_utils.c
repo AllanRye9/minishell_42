@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:19 by oallan            #+#    #+#             */
-/*   Updated: 2024/08/07 12:14:27 by oallan           ###   ########.fr       */
+/*   Updated: 2024/08/11 18:50:09 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_token *creat_new_token(char *value, t_token_type type)
 {
     t_token *new;
     
-    new = (t_token *)ft_calloc(1, sizeof(t_node));
+    new = (t_token *)ft_calloc(1, sizeof(t_token));
     if(!new)
         return NULL;
     new->type = type;

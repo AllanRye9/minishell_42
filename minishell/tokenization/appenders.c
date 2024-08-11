@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   appenders.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:55:49 by oallan            #+#    #+#             */
-/*   Updated: 2024/08/07 12:14:20 by oallan           ###   ########.fr       */
+/*   Updated: 2024/08/11 22:44:00 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int ft_append_separators(t_token_type t, char **line, t_token **token_list)
     token = creat_new_token(NULL, t);
     if(!token)
         return (0);
+	add_token_back(token_list, token);
+    (*line)++;
     if (t == T_HEREDOC || t == T_APPEND || t == T_OR || t == T_AND)
 		(*line)++;
-    add_token_back(token_list, token);
-        (*line)++;
     return (1);
 }
 

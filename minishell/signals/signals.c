@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:13:20 by oallan            #+#    #+#             */
-/*   Updated: 2024/08/11 14:45:39 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/11 18:39:36 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void sigint_handler(int code)
 	else
 	{
 		ft_putstr_fd("\n", 1);
-		// rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
