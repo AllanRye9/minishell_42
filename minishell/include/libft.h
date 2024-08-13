@@ -6,11 +6,11 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 16:45:43 by oallan            #+#    #+#             */
-/*   Updated: 2024/08/11 14:57:50 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:31:46 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	LIBFT_H
+#ifndef LIBFT_H
 # define LIBFT_H
 
 # include <stdlib.h>
@@ -29,7 +29,9 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
 # endif
-typedef struct s_minishell t_minishell;
+
+typedef struct s_minishell	t_minishell;
+
 typedef struct s_list
 {
 	void			*content;

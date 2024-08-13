@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 17:42:11 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/07 12:15:11 by oallan           ###   ########.fr       */
+/*   Updated: 2024/08/13 15:40:30 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKENIZING_H
-# define TOKENIZING_H
+#ifndef TOKENIZATION_H
+# define TOKENIZATION_H
 
 # define PROMPT "minishell$ "
 
-#include "minishell.h"
+# include "minishell.h"
 
 typedef enum e_token_type
 {
@@ -46,8 +46,10 @@ void			ft_skip_spaces(char **line);
 int				ft_is_space(char c);
 int				ft_is_separator(char *s);
 int				ft_is_quote(char c);
-int 			ft_append_separators(t_token_type t, char **line, t_token **token_list);
-int				ft_append_identifiers(char **line, t_token **token_list, t_minishell *g);
+int				ft_append_separators(t_token_type t, char **line,
+					t_token **token_list);
+int				ft_append_identifiers(char **line, t_token **token_list,
+					t_minishell *g);
 t_token			*ft_token_handler(char *line, t_minishell *g);
 t_token			*ft_tokenize(t_minishell *g);
 t_token			*creat_new_token(char *value, t_token_type type);

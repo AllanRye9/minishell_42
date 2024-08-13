@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/13 13:49:50 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:43:40 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 # include "tokenization.h"
 # include "colors.h"
 
-int		sig_pipe[2];
+int					sig_pipe[2];
+t_signal_handler	g_sig_handler;
 
 typedef struct s_env
 {
@@ -76,11 +77,11 @@ typedef struct s_path
 	char	*path;
 }	t_path;
 
-typedef struct	s_signal_handler
+typedef struct s_signal_handler
 {
 	bool			heredoc_sgint;
 	bool			signint_child;
-	struct 	termios	original_term;
+	struct termios	original_term;
 	bool			cleanup_needed;
 }	t_signal_handler;
 
@@ -98,8 +99,6 @@ typedef struct s_minishell
 	t_env			*envlst;
 }					t_minishell;
 
-t_signal_handler g_sig_handler;
-
 //Builtins functions
 void			free_sysvar(t_minishell *g_shell);
 void			free_doublearr(char **str);
@@ -116,7 +115,8 @@ int				after_eql_sign(char *str);
 char			**add_var(char **env, char *argv);
 int				custom_export(t_minishell *g_shell, char **argv);
 int				unset(t_minishell *g_shell, char **args);
-void			ft_update_envlst(char *key, char *value, bool create, t_minishell *g_shell);
+void			ft_update_envlst(char *key, char *value, bool create,
+					t_minishell *g_shell);
 //clean function
 void			ft_clean(t_minishell *G_shell_);
 //signal functions
