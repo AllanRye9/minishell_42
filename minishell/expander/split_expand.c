@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:54:52 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/13 15:25:18 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:20:01 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static char	**ft_allocator(char const *args, char **str)
 			start = i;
 			ft_skip_word(args, &i);
 			str[j] = ft_calloc(i - start + 1, sizeof(char));
-			if (!args[j])
+			if (!str[j])
 				return (NULL);
 			j++;
 		}

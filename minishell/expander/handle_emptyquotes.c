@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 16:29:03 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/13 15:24:58 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:17:03 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*handle_empty_quotes(char *args)
 	while (args[i])
 	{
 		if ((args[i] == '\'' && args[i + 1] == '\'')
-			|| (args[0] == '"' && args[i + 1] == '"'))
+			|| (args[i] == '"' && args[i + 1] == '"'))
 			i += 2;
 		else
 			tmp[j++] = args[i++];
