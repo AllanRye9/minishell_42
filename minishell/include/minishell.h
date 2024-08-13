@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/13 15:43:40 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 17:45:25 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@
 # include "parsing.h"
 # include "tokenization.h"
 # include "colors.h"
-
-int					sig_pipe[2];
-t_signal_handler	g_sig_handler;
 
 typedef struct s_env
 {
@@ -84,6 +81,8 @@ typedef struct s_signal_handler
 	struct termios	original_term;
 	bool			cleanup_needed;
 }	t_signal_handler;
+
+t_signal_handler	g_sig_handler;
 
 typedef struct s_minishell
 {
