@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:31:48 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/13 13:54:58 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 13:59:29 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,15 @@ int	main(int argc, char **argv, char **env)
 {
 	t_minishell	g_shell;
 
-	(void)argc;
-	(void)argv;
+	((void)argc, (void)argv);
 	init_environment(env, &g_shell);
 	while (1)
 	{
 		init_signals();
 		g_shell.line = readline(PROMPT_MSG);
 		if (!g_shell.line)
-		{
-			ft_clean(&g_shell);
-			ft_putstr_fd("exit\n", STDOUT_FILENO);
-			exit(g_shell.exit_s);
-		}
+			(ft_clean(&g_shell),
+				ft_putstr_fd("exit\n", STDOUT_FILENO), exit(g_shell.exit_s));
 		if (g_shell.line[0])
 			add_history(g_shell.line);
 		g_shell.tokens = ft_tokenize(&g_shell);
