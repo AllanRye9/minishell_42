@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 15:39:23 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/06 17:52:17 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 08:35:31 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_heredoc(t_io_node *io, int fd[2], t_minishell *g_shell)
 		line = readline("> ");
 		if (!line || is_delimeter(io->value, line))
 			break ;
-		if (!quote)
+		if (!*quote)
 			ft_heredoc_expander(line, fd[1], g_shell);
 		else
 			ft_putendl_fd(line, fd[1]);

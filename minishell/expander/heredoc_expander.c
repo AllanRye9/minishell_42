@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 18:28:43 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/03 16:20:35 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 08:33:59 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ void	ft_heredoc_expander(char *args, int fd, t_minishell *g_shell)
 		if (args[i] == '$')
 			i += ft_writer(args, i, fd, g_shell);
 		else
-		{
-			ft_putchar_fd(args[i], fd);
-			i += 1;
-		}
+			i += (ft_putchar_fd(args[i], fd), 1);
 	}
 	ft_putchar_fd('\n', fd);
 }
