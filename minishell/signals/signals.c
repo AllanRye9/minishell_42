@@ -6,16 +6,16 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:13:20 by oallan            #+#    #+#             */
-/*   Updated: 2024/08/11 18:39:36 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 14:17:37 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void sigint_handler(int code)
+static void	sigint_handler(int code)
 {
 	(void)code;
-	if(g_sig_handler.signint_child)
+	if (g_sig_handler.signint_child)
 	{
 		ft_putstr_fd("\n", 1);
 		g_sig_handler.signint_child = false;
@@ -30,13 +30,13 @@ static void sigint_handler(int code)
 	}
 }
 
-void sigquit_handler(int code)
+void	sigquit_handler(int code)
 {
 	(void)code;
 	ft_putstr_fd("Quit: 3\n", 1);
 }
 
-void init_signals(void)
+void	init_signals(void)
 {
 	struct termios		term;
 

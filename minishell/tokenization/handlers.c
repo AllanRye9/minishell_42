@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   handlers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:55:59 by oallan            #+#    #+#             */
-/*   Updated: 2024/08/07 12:14:24 by oallan           ###   ########.fr       */
+/*   Updated: 2024/08/13 14:23:39 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_identify_separators(char **line, t_token **token_list)
+int	ft_identify_separators(char **line, t_token **token_list)
 {
-    if (!ft_strncmp(*line, "<<", 2))
+	if (!ft_strncmp(*line, "<<", 2))
 		return (ft_append_separators(T_HEREDOC, line, token_list) && 1);
 	else if (!ft_strncmp(*line, ">>", 2))
 		return (ft_append_separators(T_APPEND, line, token_list) && 1);
@@ -34,25 +34,25 @@ int ft_identify_separators(char **line, t_token **token_list)
 		return (ft_append_separators(T_PIPE, line, token_list) && 1);
 }
 
-t_token *ft_token_handler(char *line, t_minishell *g)
+t_token	*ft_token_handler(char *line, t_minishell *g)
 {
-    int			error;
-    t_token 	*token_list;
-    
-    error = 0;
-    token_list = NULL;
-    while(*line)
-    {
-        if(error)
-            return (ft_clear_token_list(&token_list), NULL);
-        if(ft_is_space(*line))
-            ft_skip_spaces(&line);
-        else if (!ft_strncmp(line, "<", 1) || !ft_strncmp(line, ">", 1)
+	int			error;
+	t_token		*token_list;
+
+	error = 0;
+	token_list = NULL;
+	while (*line)
+	{
+		if (error)
+			return (ft_clear_token_list(&token_list), NULL);
+		if (ft_is_space(*line))
+			ft_skip_spaces(&line);
+		else if (!ft_strncmp(line, "<", 1) || !ft_strncmp(line, ">", 1)
 			|| !ft_strncmp(line, "|", 1) || !ft_strncmp(line, "&&", 2)
 			|| !ft_strncmp(line, "(", 1) || !ft_strncmp(line, ")", 1))
-		    error = (!ft_identify_separators(&line, &token_list) && 1);
+			error = (!ft_identify_separators(&line, &token_list) && 1);
 		else
-		    error = (!ft_append_identifiers(&line, &token_list, g) && 1);
-    }
-    return (token_list);
+			error = (!ft_append_identifiers(&line, &token_list, g) && 1);
+	}
+	return (token_list);
 }
