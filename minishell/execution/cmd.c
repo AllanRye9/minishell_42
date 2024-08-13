@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 14:59:22 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/11 14:08:56 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:20:27 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ static int	ft_exec_child(t_node *node, t_minishell *g_shell)
 			status = ft_err_msg(path_status.err);
 			(ft_clean(g_shell), exit(status));
 		}
-		if (execve(path_status.path, node->expanded_args, g_shell->environ) == -1)
+		if (execve(path_status.path,
+				node->expanded_args, g_shell->environ) == -1)
 			(ft_clean(g_shell), exit(1));
 	}
 	waitpid(fork_pid, &status, 0);

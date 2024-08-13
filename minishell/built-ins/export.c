@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 17:42:55 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/06 14:45:16 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:18:51 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_check_key(char *str)
 	i = 1;
 	if (!ft_isalnum(*str) && *str != '-')
 		return (0);
-	while(str[i] && str[i] != '=')
+	while (str[i] && str[i] != '=')
 	{
 		if (!ft_isalpha(str[i]) && str[i] != '_')
 			return (0);
@@ -73,7 +73,8 @@ int	ft_export(t_minishell *g_shell, char **argv)
 		{
 			key = ft_extract_key(argv[i]);
 			if (ft_env_entry_exist(key, g_shell))
-				ft_update_envlst(key, ft_extract_value(argv[i]), false, g_shell);
+				ft_update_envlst(key, ft_extract_value(argv[i]),
+					false, g_shell);
 			else
 				ft_update_envlst(key, ft_extract_value(argv[i]), true, g_shell);
 		}

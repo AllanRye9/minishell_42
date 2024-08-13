@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 02:53:00 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/06 18:04:50 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:21:58 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	init_leaf(t_node *node, t_minishell *g_shell)
 			if (!pid)
 				ft_heredoc(io, fd, g_shell);
 			if (ft_exit_leaf(fd, &pid))
-				return;
+				return ;
 			io->here_doc = fd[0];
 		}
 		else

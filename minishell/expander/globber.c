@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 16:51:51 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/10 22:59:06 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:24:56 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	**ft_globber_helper(char *args)
 			if (ft_match_star(args, entry->d_name)
 				&& ft_matches_visibility(args, entry->d_name))
 				returned[match_count++] = ft_strdup(entry->d_name);
-			closedir(dir);
+		closedir(dir);
 	}
 	return (returned);
 }

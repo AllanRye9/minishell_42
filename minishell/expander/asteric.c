@@ -6,13 +6,14 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 01:16:20 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/10 22:59:13 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:22:57 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static bool	match_exist(char **pattern, char **last_wildcard, char **last_match, char **args)
+static bool	match_exist(char **pattern, char **last_wildcard,
+	char **last_match, char **args)
 {
 	if (**pattern == **args)
 	{
@@ -30,7 +31,8 @@ static bool	match_exist(char **pattern, char **last_wildcard, char **last_match,
 		return (false);
 }
 
-static bool	ft_handle_stars(char **pattern, char **last_wildcard, char **last_match, char *args)
+static bool	ft_handle_stars(char **pattern, char **last_wildcard,
+	char **last_match, char *args)
 {
 	while (**pattern == '*')
 		(*pattern)++;
@@ -70,8 +72,8 @@ bool	ft_match_star(char *pattern, char *args)
 	while (*args)
 	{
 		handle_quotes(&pattern, &quotes);
-		if (*pattern == '*' && !quotes
-				&& ft_handle_stars(&pattern, &last_wildcard, &last_match, args))
+		if (*pattern == '*' && !quotes && ft_handle_stars
+			(&pattern, &last_wildcard, &last_match, args))
 			return (false);
 		else if (!match_exist(&pattern, &last_wildcard, &last_match, &args))
 			return (false);

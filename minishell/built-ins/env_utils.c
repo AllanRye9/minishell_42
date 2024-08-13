@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:45:59 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/11 15:50:31 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:17:18 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static t_env	*ft_envlst_new(char *key, char *value)
 	return (new_env);
 }
 
-void	ft_update_envlst(char *key, char *value, bool create, t_minishell *g_shell)
+void	ft_update_envlst(char *key, char *value,
+	bool create, t_minishell *g_shell)
 {
 	t_env	*envlst;
 

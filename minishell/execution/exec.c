@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 13:22:43 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/06 18:00:30 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:21:06 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	ft_get_exitstatus(int status)
 	return (WEXITSTATUS(status));
 }
 
-static void	ft_exec_child(t_node *node, int fd[2], t_ast_direction direction, t_minishell *g_shell)
+static void	ft_exec_child(t_node *node, int fd[2],
+	t_ast_direction direction, t_minishell *g_shell)
 {
 	int	status;
 
@@ -39,7 +40,7 @@ static void	ft_exec_child(t_node *node, int fd[2], t_ast_direction direction, t_
 	(ft_clean(g_shell), exit(status));
 }
 
-static	int ft_exec_pipe(t_node *tree, t_minishell *g_shell)
+static int	ft_exec_pipe(t_node *tree, t_minishell *g_shell)
 {
 	int	status;
 	int	fd[2];

@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 11:35:05 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/13 10:41:14 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:29:30 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	exit_with_code(char *args, t_minishell *g_shell)
 {
 	int					i;
 	int					sign;
-	int					exit_status;
+	int					e_s;
 	unsigned long long	result;
 
 	i = 0;
@@ -50,9 +50,8 @@ int	exit_with_code(char *args, t_minishell *g_shell)
 	ft_skip_spaces_sign(args, &i, &sign);
 	if (!ft_isnum(args + i))
 	{
-		exit_status = ft_err_msg((t_err){ENO_EXEC_255, ERRMSG_NUMERIC_REQUI, args});
-		ft_clean(g_shell);
-		exit(exit_status);
+		e_s = ft_err_msg((t_err){ENO_EXEC_255, ERRMSG_NUMERIC_REQUI, args});
+		(ft_clean(g_shell), exit(e_s));
 	}
 	result = 0;
 	while (args[i])
@@ -60,8 +59,8 @@ int	exit_with_code(char *args, t_minishell *g_shell)
 		result = (result * 10) + (args[i] - '0');
 		if (result > LONG_MAX)
 		{
-			exit_status = ft_err_msg((t_err){ENO_EXEC_255, ERRMSG_NUMERIC_REQUI, args});
-			(ft_clean(g_shell), exit(exit_status));
+			e_s = ft_err_msg((t_err){ENO_EXEC_255, ERRMSG_NUMERIC_REQUI, args});
+			(ft_clean(g_shell), exit(e_s));
 		}
 		i++;
 	}
@@ -77,7 +76,8 @@ void	ft_exit(t_minishell *g_shell, char **args)
 	{
 		if (args[2] && ft_isnum(args[1]))
 		{
-			exit_status = ft_err_msg((t_err){ENO_GENERAL, ERRMSG_TOO_MANY_ARGS, NULL});
+			exit_status = ft_err_msg((t_err)
+				{ENO_GENERAL, ERRMSG_TOO_MANY_ARGS, NULL});
 			ft_clean(g_shell);
 			exit(exit_status);
 		}

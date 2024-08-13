@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 16:39:35 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/06 17:20:52 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:17:53 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_get_envlst_val(char *key, t_minishell *g_shell)
 {
-	t_env *envlst;
+	t_env	*envlst;
 
 	envlst = g_shell->envlst;
 	while (envlst)
@@ -50,7 +50,8 @@ char	*ft_extract_value(char *str)
 		if (str[i] == '=')
 		{
 			i++;
-			return (ft_garbage_collector(ft_substr(str, i, ft_strlen(str) - i), false));
+			return (ft_garbage_collector(ft_substr(str,
+						i, ft_strlen(str) - i), false));
 		}
 		i++;
 	}

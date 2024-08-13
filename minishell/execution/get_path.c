@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 15:12:03 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/04 16:17:27 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:21:25 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static t_path	ft_get_envlst_path(char *path, char *cmd)
 	i = 0;
 	while (split_path[i])
 	{
-		cmd_path = ft_garbage_collector(ft_strjoin_with_f(ft_strdup(split_path[i]), ft_strdup(cmd), '/'), false);
+		cmd_path = ft_garbage_collector(ft_strjoin_with_f
+				(ft_strdup(split_path[i]), ft_strdup(cmd), '/'), false);
 		err = ft_check_exec(cmd_path, true);
 		if (err.no == ENO_SUCCESS)
 			return ((t_path){(t_err){ENO_SUCCESS, 42, cmd_path}, cmd_path});
