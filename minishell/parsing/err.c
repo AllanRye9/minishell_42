@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:56:31 by oallan            #+#    #+#             */
-/*   Updated: 2024/08/11 22:44:39 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 13:50:18 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_handle_parse_err(t_minishell *g_minishell)
 			ft_putstr_fd("'\n", 2);
 			g_minishell->exit_s = 258;
 		}
-		ft_clear_astree(&g_minishell->ast, g_minishell);
+		clear_astree(&g_minishell->ast, g_minishell);
 		ft_bzero(&g_minishell->parse_err, sizeof(t_parse_err));
 	}
 }

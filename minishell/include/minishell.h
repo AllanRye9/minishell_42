@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 19:00:58 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/11 14:54:50 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 13:49:50 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,13 +171,13 @@ char			*ft_extract_key(char *str);
 bool			ft_env_entry_exist(char *key, t_minishell *g_shell);
 char			*ft_extract_value(char *str);
 
-void 			ft_clear_astree(t_node **astree, t_minishell *g);
-char	*ft_handle_dollar(char *args, size_t *i, t_minishell *g_shell);
+void			clear_astree(t_node **astree, t_minishell *g);
+char			*ft_handle_dollar(char *args, size_t *i, t_minishell *g_shell);
 
 //commands
 
 int				ft_cd(t_minishell *g_shell, char *path);
-int 			ft_echo(char** args);
+int				ft_echo(char **args);
 int				ft_env(t_minishell *g_shell);
 void			ft_exit(t_minishell *g_shell, char **args);
 int				ft_export(t_minishell *g_shell, char **argv);

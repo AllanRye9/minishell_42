@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oallan <oallan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:48:10 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/07 12:15:14 by oallan           ###   ########.fr       */
+/*   Updated: 2024/08/13 13:50:32 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void					ft_append_io_node(t_io_node **lst, t_io_node *new);
 void					ft_clear_io_list(t_io_node **lst);
 void					ft_clear_cmd_node(t_node *node);
 void					ft_recursive_clear_astree(t_node *node);
-void					ft_clear_astree(t_node **astree, t_minishell *g);
+void					clear_astree(t_node **astree, t_minishell *g);
 void                    ft_clear_token_list(t_token **token_list);
 void                    add_token_back(t_token **lst, t_token *new);
 void					ft_handle_parse_err(t_minishell *g_minishell);
