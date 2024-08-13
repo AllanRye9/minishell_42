@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:31:48 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/13 09:27:28 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 10:42:58 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	init_environment(char **env, t_minishell *g_shell)
 static void	ft_exec(t_minishell *g_shell)
 {
 	signal(SIGQUIT, sigquit_handler);
-	printf("AST reached\n");
 	init_asttree(g_shell->ast, g_shell);
 	if (g_sig_handler.heredoc_sgint)
 	{
@@ -59,13 +58,9 @@ int main(int argc, char **argv, char **env)
         g_shell.tokens = ft_tokenize(&g_shell);
         if (g_shell.tokens)
 		{
-			printf("Reached on parsing\n");
             g_shell.ast = ft_parse(&g_shell);
             if (!g_shell.parse_err.type)
-			{
-				printf("Parsing is done and no error occured\n");
 				ft_exec(&g_shell);
-			}
             else
                 ft_handle_parse_err(&g_shell);
         }

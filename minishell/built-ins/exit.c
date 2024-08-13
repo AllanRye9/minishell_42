@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 11:35:05 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/11 14:05:50 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/13 10:41:14 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ void	ft_exit(t_minishell *g_shell, char **args)
 			ft_clean(g_shell);
 			exit(exit_status);
 		}
+		else
+			exit_status = exit_with_code(args[1], g_shell);
 	}
-	else
-		exit_status = exit_with_code(args[1], g_shell);
 	ft_clean(g_shell);
 	exit(exit_status);
 }
