@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:17:46 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/13 15:17:02 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:14:30 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ static int	check_options(char *args)
 	int	i;
 
 	i = 0;
-	if (args[i] != '-')
+	if (args[0] != '-')
 		return (0);
 	i++;
 	while (args[i])
 	{
-		if (args[i] != '\n')
+		if (args[i] != 'n')
 			return (0);
 		i++;
 	}
@@ -36,7 +36,7 @@ int	ft_echo(char **args)
 
 	i = 1;
 	opt = 0;
-	while (args[i] && check_options(args[i]) == 1)
+	while (args[i] != NULL && check_options(args[i]) == 1)
 	{
 		opt = 1;
 		i++;
@@ -48,7 +48,7 @@ int	ft_echo(char **args)
 			ft_putstr_fd(" ", 1);
 		i++;
 	}
-	if (!opt)
+	if (opt == 0)
 		ft_putstr_fd("\n", 1);
 	return (0);
 }
