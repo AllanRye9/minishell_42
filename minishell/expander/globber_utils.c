@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 18:41:37 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/13 15:23:07 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/14 20:32:21 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static size_t	ft_multi_arr_len(char ***arr)
 		j = 0;
 		while (arr[i][j])
 			j++;
-		len += 1;
+		len += j;
 		i++;
 	}
 	return (len);
@@ -93,7 +93,7 @@ char	**ft_join_str_arrs(char ***arr)
 			joined[len + j] = ft_strdup(arr[i][j]);
 			j++;
 		}
-		len += 1;
+		len += j;
 		i++;
 	}
 	return (free_tripearr(arr), joined);
