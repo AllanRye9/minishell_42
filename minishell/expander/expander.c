@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:43:14 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/13 22:18:06 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/15 18:20:56 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ static char	*ft_handle_wildcard(char *args, t_minishell *g_shell)
 	while (args[i])
 	{
 		if (args[i] == '\'')
-			tmp = ft_strjoin(tmp, ft_handle_squotes(args, &i));
+			tmp = ft_strjoin_f(tmp, ft_handle_squotes(args, &i));
 		else if (args[i] == '"')
-			tmp = ft_strjoin(tmp, ft_handle_dquotes(args, &i, g_shell));
+			tmp = ft_strjoin_f(tmp, ft_handle_dquotes(args, &i, g_shell));
 		else if (args[i] == '$')
-			tmp = ft_strjoin(tmp, ft_handle_dollar(args, &i, g_shell));
+			tmp = ft_strjoin_f(tmp, ft_handle_dollar(args, &i, g_shell));
 		else
-			tmp = ft_strjoin(tmp, ft_handle_arg(args, &i));
+			tmp = ft_strjoin_f(tmp, ft_handle_arg(args, &i));
 	}
 	return (tmp);
 }
