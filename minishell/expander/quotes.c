@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 01:01:22 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/13 15:25:09 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/15 22:22:52 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,15 @@ static size_t	ft_unquoted_len(char *args)
 	len = 0;
 	while (args[i])
 	{
-		if (!quotes)
-			quotes = args[i++];
-		else if (args[i] == quotes)
-			quotes = ((i++) && 0);
+		if (args[i] == '\'' || args[i] == '"')
+		{
+			if (!quotes)
+				quotes = args[i++];
+			else if (args[i] == quotes)
+				quotes = ((i++) && 0);
+			else
+				len += (i++ || 1);
+		}
 		else
 			len += (i++ || 1);
 	}
