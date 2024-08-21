@@ -70,14 +70,19 @@ SRCS			:=	$(PARSING)\
 					$(SIGNALS)\
 					$(EXPANDER)\
 
-OBJS		:=		$(SRCS:.c=.o)
+OBJS			:=	$(SRCS:.c=.o)
 
-READLINE_PATH:=	$(shell brew --prefix readline)
+READLINE_PATH	:=	$(HOME)/homebrew/opt/readline
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ -Iinclude -I$(READLINE_PATH)/include
 
-all: $(NAME)
+all: install_deps $(NAME)
+
+install_deps:
+	@echo "Installing Homebrew and dependencies..."
+	@/bin/bash -c "$(shell curl -fsSL https://raw.githubusercontent.com/kube/42homebrew/master/install.sh)"
+	@brew install readline
 
 $(LIBFT):
 	@make -C $(LIBFT_PATH)
@@ -95,4 +100,5 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re install_deps
+
