@@ -1,7 +1,7 @@
 NAME			:= minishell
 
 LIBFT			:= libft.a
-LIBFT_PATH		:= "lib/libft"
+LIBFT_PATH		:= lib/libft
 
 CC				:= cc
 
@@ -77,17 +77,16 @@ READLINE_PATH	:=	$(HOME)/homebrew/opt/readline
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ -Iinclude -I$(READLINE_PATH)/include
 
-all: install_deps $(NAME)
+all: $(NAME)
 
 install_deps:
-	@echo "Installing Homebrew and dependencies..."
 	@/bin/bash -c "$(shell curl -fsSL https://raw.githubusercontent.com/kube/42homebrew/master/install.sh)"
 	@brew install readline
 
 $(LIBFT):
 	@make -C $(LIBFT_PATH)
 
-$(NAME): $(LIBFT) $(OBJS)
+$(NAME): install_deps $(LIBFT) $(OBJS)
 	@$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -L$(READLINE_PATH)/lib -lreadline -lhistory
 
 clean:
@@ -101,4 +100,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re install_deps
-
