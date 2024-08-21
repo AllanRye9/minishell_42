@@ -77,16 +77,21 @@ READLINE_PATH	:=	$(HOME)/homebrew/opt/readline
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ -Iinclude -I$(READLINE_PATH)/include
 
-all: $(NAME)
+all: install_deps $(NAME)
 
 install_deps:
-	@/bin/bash -c "$(shell curl -fsSL https://raw.githubusercontent.com/kube/42homebrew/master/install.sh)"
-	@brew install readline
+	@echo "Installing Homebrew and dependencies..."
+	@if [ ! -d "$(HOME)/homebrew" ]; then \
+		mkdir -p $(HOME)/homebrew && \
+		curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C $(HOME)/homebrew; \
+	fi
+	@export PATH=$(HOME)/homebrew/bin:$$PATH && \
+	brew install readline
 
 $(LIBFT):
 	@make -C $(LIBFT_PATH)
 
-$(NAME): install_deps $(LIBFT) $(OBJS)
+$(NAME): $(LIBFT) $(OBJS)
 	@$(CC) -o $(NAME) $(OBJS) -L$(LIBFT_PATH) -lft -L$(READLINE_PATH)/lib -lreadline -lhistory
 
 clean:
