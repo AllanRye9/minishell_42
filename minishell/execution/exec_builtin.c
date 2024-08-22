@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 16:43:39 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/13 15:20:46 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:42:28 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	ft_exec_builtin(char **args, t_minishell *g_shell)
 		return (ft_unset(g_shell, args));
 	if (ft_strcmp(args[0], "env") == 0)
 		return (ft_env(g_shell));
-	ft_exit(g_shell, args);
+	if (ft_strcmp(args[0], "exit") == 0)
+		return (ft_exit(g_shell, args));
 	return (ENO_GENERAL);
 }
