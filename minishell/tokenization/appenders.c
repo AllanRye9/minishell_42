@@ -6,11 +6,26 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:55:49 by oallan            #+#    #+#             */
-/*   Updated: 2024/08/13 14:20:17 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/23 15:41:42 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+bool	ft_is_spchar(char c)
+{
+	return (c == ';' || c == '\\');
+}
+
+int	ft_err_spchar(char c)
+{
+	ft_putstr_fd("minishell: invalid identifier ", 2);
+	ft_putchar_fd('\'', 2);
+	ft_putchar_fd(c, 2);
+	ft_putchar_fd('\'', 2);
+	ft_putstr_fd("\n", 2);
+	return (0);
+}
 
 int	ft_append_separators(t_token_type t, char **line, t_token **token_list)
 {
@@ -37,6 +52,8 @@ int	ft_append_identifiers(char **line, t_token **token_list, t_minishell *g)
 	i = 0;
 	while (arr[i] && !ft_is_separator(arr + i))
 	{
+		if (ft_is_spchar(arr[i]))
+			return (ft_err_spchar(arr[i]));
 		if (ft_is_quote(arr[i]))
 		{
 			if (!ft_skip_quotes(arr, &i))
