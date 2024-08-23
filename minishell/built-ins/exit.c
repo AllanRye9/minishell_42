@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:14:05 by sbartoul          #+#    #+#             */
-/*   Updated: 2024/08/23 12:14:07 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/23 12:25:01 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,37 +67,31 @@ int	exit_with_code(char *args, t_minishell *g_shell)
 	return ((result * sign) % 256);
 }
 
-int	ft_exit(t_minishell *g_shell, char **args)
+int	ft_exit(t_minishell *g_shell, char **a)
 {
-	int	exit_status;
+	int	e_s;
 
-	exit_status = g_shell->exit_s;
-
-	if (args[1])
+	e_s = g_shell->exit_s;
+	if (a[1])
 	{
-		if (!ft_isnum(args[1])) // Check if args[1] is not numeric
+		if (!ft_isnum(a[1]))
 		{
 			ft_putendl_fd("exit", STDOUT_FILENO);
-			exit_status = ft_err_msg((t_err){ENO_EXEC_255, ERRMSG_NUMERIC_REQUI, args[1]});
-			ft_clean(g_shell);
-			exit(exit_status);
+			e_s = ft_err_msg((t_err){ENO_EXEC_255, ERRMSG_NUMERIC_REQUI, a[1]});
+			(ft_clean(g_shell), exit(e_s));
 		}
-		if (args[2]) // Check if there's a third argument
+		if (a[2])
 		{
-			exit_status = ft_err_msg((t_err){ENO_GENERAL, ERRMSG_TOO_MANY_ARGS, NULL}); // Use ENO_GENERAL here
-			return (exit_status);
+			e_s = ft_err_msg((t_err){ENO_GENERAL, ERRMSG_TOO_MANY_ARGS, NULL});
+			return (e_s);
 		}
-		else // If args[1] is numeric and there is no third argument
+		else
 		{
-			exit_status = exit_with_code(args[1], g_shell);
-			ft_clean(g_shell);
-			exit(exit_status);
+			e_s = exit_with_code(a[1], g_shell);
+			(ft_clean(g_shell), exit(e_s));
 		}
 	}
 	else
-	{
-		ft_clean(g_shell);
-		exit(exit_status);
-	}
-	return (exit_status);
+		(ft_clean(g_shell), exit(e_s));
+	return (e_s);
 }
